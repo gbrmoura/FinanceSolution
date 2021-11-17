@@ -1,16 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace FinanceSolution.Data.Models
 {
     public class UsuarioModel
     {
+        [Key]
         public Guid Codigo { get; set; }
+
+        [Required]
+        [MaxLength(120)]
         public string Nome { get; set; }
+
+        [Required]
+        [MaxLength(120)]
+        public string Sobrenome { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
-        public int MyProperty { get; set; }
+        
+        [Required]
+        [MaxLength(20)]
+        public string Login { get; set; }
+
+        [Required]
+        public string Senha { get; set; }
+        public List<LancamentoModel> Lancamentos { get; set; }
+        private bool status = true;
+        public bool Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+        
     }
 }

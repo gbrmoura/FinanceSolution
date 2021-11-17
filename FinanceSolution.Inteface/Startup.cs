@@ -1,13 +1,10 @@
+using FinanceSolution.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FinanceSolution.Inteface
 {
@@ -22,6 +19,8 @@ namespace FinanceSolution.Inteface
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContextPool<FinanceSolutionContext>((ops) => ops.UseMySQL(connectionString));
             services.AddRazorPages();
         }
 

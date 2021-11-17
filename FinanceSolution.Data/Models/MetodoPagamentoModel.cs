@@ -14,6 +14,7 @@ namespace FinanceSolution.Data.Models
         [Required]
         [MaxLength(120)]
         public string Descricao { get; set; }
+        public List<LancamentoModel> Lancamentos { get; set; }
         private bool status = true;
         public bool Status
         {

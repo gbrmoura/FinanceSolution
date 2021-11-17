@@ -19,6 +19,7 @@ namespace FinanceSolution.Data.Models
         [Required]
         [Range(1, 2)]
         public LancamentoTipoEnum Tipo { get; set; }
+        public List<LancamentoModel> Lancamentos { get; set; }
 
         private bool status = true;
         public bool Status

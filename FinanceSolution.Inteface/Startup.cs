@@ -19,7 +19,7 @@ namespace FinanceSolution.Inteface
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = _configuration.GetConnectionString("DefaultConnection");
+            string connectionString = _configuration.GetConnectionString("MySQLConnection");
             services.AddDbContextPool<FinanceSolutionContext>((ops) => ops.UseMySQL(connectionString));
             services.AddRazorPages();
         }

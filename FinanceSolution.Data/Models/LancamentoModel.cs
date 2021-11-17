@@ -23,9 +23,7 @@ namespace FinanceSolution.Data.Models
         [Required]
         [MaxLength(240)]
         public string Observacao { get; set; }
-
-        [ForeignKey("LancamentoArquivo")]
-        public Guid LancamentoArquivoCodigo { get; set; }
+        
         public List<LancamentoArquivoModel> LancamentoArquivos { get; set; }
 
         [ForeignKey("LancamentoTipo")]

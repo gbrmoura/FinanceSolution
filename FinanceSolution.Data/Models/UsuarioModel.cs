@@ -20,10 +20,6 @@ namespace FinanceSolution.Data.Models
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        
-        [Required]
-        [MaxLength(20)]
-        public string Login { get; set; }
 
         [Required]
         public string Senha { get; set; }

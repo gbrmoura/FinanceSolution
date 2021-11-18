@@ -1,6 +1,10 @@
+using System;
 using FinanceSolution.Data;
+using FinanceSolution.Inteface.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,9 +23,14 @@ namespace FinanceSolution.Inteface
 
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = _configuration.GetConnectionString("MySQLConnection");
-            services.AddDbContextPool<FinanceSolutionContext>((ops) => ops.UseMySQL(connectionString));
+            string connection = _configuration.GetConnectionString("MySQLConnection");
+            services.AddDbContextPool<FinanceSolutionContext>((ops) => ops.UseMySQL(connection));
             services.AddRazorPages();
+
+
+            /** Scoped Services  **/
+            services.AddScoped<PasswordService>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

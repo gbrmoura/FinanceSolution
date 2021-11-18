@@ -1,0 +1,87 @@
+﻿@page
+@model FinanceSolution.Inteface.Pages.Usuario.LoginModel
+@{
+    Layout = null;
+}
+
+
+<style> </style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+    <!--- Quixlab Styles  -->
+    <link href="~/css/style.css" rel="stylesheet">
+    <link href="~/css/style.css.map" rel="stylesheet">
+
+</head>
+<body class="h-100" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_2" data-headerbg="color_2" data-sidebar-style="full" data-sibebarbg="color_2" data-sidebar-position="static" data-header-position="static" data-container="wide" direction="ltr">
+    
+    <!-- Place Holder Starter -->
+    <div id="preloader" style="display: none;">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Login Content -->
+    <div class="login-form-bg h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100">
+                <div class="col-xl-6">
+                    <div class="form-input-content">
+                        <div class="card login-form mb-0">
+                            <div class="card-body pt-5">
+                                <h2>Finance Solution</h2>
+                                <form class="mt-5 mb-3 login-input" method="post">
+                                    <div class="form-group">
+                                        <input asp-for="Email" type="email" class="form-control" placeholder="E-mail">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input asp-for="Senha" type="password" class="form-control" placeholder="Senha">
+                                    </div>
+
+                                    <button class="btn login-form__btn submit w-100" type="submit">Entrar</button>
+                                </form>
+                                <p class="mt-1 login-form__footer">Não tem Conta? <a href="/Usuario/Registrar" class="text-primary">Criar uma Conta</a> Agora!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <!--- Quixlab Scripts  -->
+    <script src="~/js/common.min.js"></script>
+    <script src="~/js/settings.min.js"></script>
+    <script src="~/js/gleek.min.js"></script>
+    <script src="~/js/styleSwitcher.min.js"></script>
+
+    <script>
+        
+        @* $('#register').click(function(){
+            window.location.href = '/Usuario/Registrar';
+        }); *@
+
+    </script>
+
+</body>
+</html>

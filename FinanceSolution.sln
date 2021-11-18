@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceSolution.Inteface", "FinanceSolution.Inteface\FinanceSolution.Inteface.csproj", "{E7D7540B-B30B-4B96-A668-9492CBA2C6A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceSolution.Inteface", "FinanceSolution.Inteface\FinanceSolution.Inteface.csproj", "{E7D7540B-B30B-4B96-A668-9492CBA2C6A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceSolution.Data", "FinanceSolution.Data\FinanceSolution.Data.csproj", "{FE376320-FCD0-4C8B-BE40-EDBE13E0676B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinanceSolution.Data", "FinanceSolution.Data\FinanceSolution.Data.csproj", "{FE376320-FCD0-4C8B-BE40-EDBE13E0676B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

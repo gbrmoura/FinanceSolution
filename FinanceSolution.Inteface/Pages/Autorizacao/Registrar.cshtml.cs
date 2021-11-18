@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
-namespace FinanceSolution.Inteface.Pages.Usuario
+namespace FinanceSolution.Inteface.Pages.Autorizacao
 {
     public class RegistrarModel : PageModel
     {

@@ -1,5 +1,5 @@
 ﻿@page
-@model FinanceSolution.Inteface.Pages.Usuario.LoginModel
+@model FinanceSolution.Inteface.Pages.Autorizacao.LoginModel
 @{
     Layout = null;
 }
@@ -13,7 +13,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Finance Solution</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -22,6 +22,9 @@
     <!--- Quixlab Styles  -->
     <link href="~/css/style.css" rel="stylesheet">
     <link href="~/css/style.css.map" rel="stylesheet">
+
+    <!-- Toastr Plugins -->
+    <link href="~/plugins/toastr/css/toastr.min.css" rel="stylesheet">
 
 </head>
 <body class="h-100" data-theme-version="light" data-layout="vertical" data-nav-headerbg="color_2" data-headerbg="color_2" data-sidebar-style="full" data-sibebarbg="color_2" data-sidebar-position="static" data-header-position="static" data-container="wide" direction="ltr">
@@ -46,16 +49,16 @@
                                 <h2>Finance Solution</h2>
                                 <form class="mt-5 mb-3 login-input" method="post">
                                     <div class="form-group">
-                                        <input asp-for="Email" type="email" class="form-control" placeholder="E-mail">
+                                        <input asp-for="Email" type="email" class="form-control" placeholder="E-mail" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input asp-for="Senha" type="password" class="form-control" placeholder="Senha">
+                                        <input asp-for="Senha" type="password" class="form-control" placeholder="Senha" required>
                                     </div>
 
                                     <button class="btn login-form__btn submit w-100" type="submit">Entrar</button>
                                 </form>
-                                <p class="mt-1 login-form__footer">Não tem Conta? <a href="/Usuario/Registrar" class="text-primary">Criar uma Conta</a> Agora!</p>
+                                <p class="mt-1 login-form__footer">Não tem Conta? <a href="/Autorizacao/Registrar" class="text-primary">Criar uma Conta</a> Agora!</p>
                             </div>
                         </div>
                     </div>
@@ -70,16 +73,48 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     
     <!--- Quixlab Scripts  -->
-    <script src="~/js/common.min.js"></script>
-    <script src="~/js/settings.min.js"></script>
-    <script src="~/js/gleek.min.js"></script>
-    <script src="~/js/styleSwitcher.min.js"></script>
+    @* <script src="~/js/custom.min.js"></script> *@
+    <script src="~/js/settings.js"></script>
+    <script src="~/js/gleek.js"></script>
+    <script src="~/js/styleSwitcher.js"></script>
+
+    <!-- Toastr Plugins -->
+    <script src="~/plugins/toastr/js/toastr.min.js"></script>
+    <script src="~/plugins/toastr/js/toastr.init.js"></script>
 
     <script>
+
+        if ('@ViewData["emailNotFound"]' == 'True') {
+            toastr.warning('Usuário não encontrado', 'Atenção', {
+                timeOut: 2000,
+                preventDuplicates: true,
+                positionClass: 'toast-top-right',
+            });
+        }
+
+        if ('@ViewData["password"]' == 'True') {
+            toastr.warning('Senha invalida', 'Atenção', {
+                timeOut: 2000,
+                preventDuplicates: true,
+                positionClass: 'toast-top-right',
+            });
+        }
         
-        @* $('#register').click(function(){
-            window.location.href = '/Usuario/Registrar';
-        }); *@
+        if ('@ViewData["error"]' == 'True') {
+            toastr.warning('Verifique as informações e tente novamente', 'Ocorreu um erro', {
+                timeOut: 2000,
+                preventDuplicates: true,
+                positionClass: 'toast-top-right',
+            });
+        }
+
+        if ('@ViewData["internal"]' == 'True') {
+            toastr.error('Occoreu um erro inesperado', 'Contato Suporte', {
+                timeOut: 2000,
+                preventDuplicates: true,
+                positionClass: 'toast-top-right',
+            });
+        }
 
     </script>
 

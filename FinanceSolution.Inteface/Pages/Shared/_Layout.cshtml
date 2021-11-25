@@ -3,44 +3,83 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FinanceSolution.Inteface</title>
+    <title>FinanceSolution</title>
+
+   <!-- Styles -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/plugins/highlightjs/styles/darkula.css">
+    
+    <!--- Quixlab Styles  -->
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/style.css.map">
+
+    <!-- Toastr Plugins -->
+    <link rel="stylesheet" href="~/plugins/toastr/css/toastr.min.css" >
+    <link rel="stylesheet" href="~/plugins/datatables/jquery.dataTables.min.css"></script>
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">FinanceSolution.Inteface</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <!-- Place Holder Starter -->
+    <div id="preloader" style="display: none;">
+        <div class="loader">
+            <svg class="circular" viewBox="25 25 50 50">
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
+            </svg>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - FinanceSolution.Inteface - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    <div class="wrapper">
 
+        <!-- Header -->
+        <nav>
+            <partial name="_TopNavigation"/>
+        </nav>
+
+        <!-- Navigation -->
+        <aside>
+            <partial name="_MainNavigationMenu"/>
+        </aside>
+
+        <!-- Main content-->
+        <section class="">
+
+            <!-- Main content -->
+            <div class="">
+                @RenderBody()
+            </div>
+
+        </section>
+    </div>
+
+    
+
+    <!-- Quixlab Lib -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    
+    <!--- Quixlab Scripts  -->
+    @* <script src="~/js/custom.min.js"></script> *@
+    <script src="~/js/gleek.js"></script>
+    <script src="~/js/settings.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/js/styleSwitcher.js"></script>
+    <script src="~/js/dashboard/dashboard-1.js"></script>
+    
+
+    <!-- Quixlab Plugins -->
+    <script src="~/plugins/toastr/js/toastr.min.js"></script>
+    <script src="~/plugins/toastr/js/toastr.init.js"></script>
+    <script src="~/plugins/common/common.min.js"></script>
+    <script src="~/plugins/highlightjs/highlight.pack.min.js"></script>
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/jquery/jquery.min.js"></script>
+
+    <script>
+        hljs.initHighlightingOnLoad();    
+    </script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

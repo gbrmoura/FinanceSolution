@@ -1,0 +1,32 @@
+<div class="nk-sidebar">  
+    <div class="nk-nav-scroll">
+        <ul class="metismenu" id="menu">
+            <li>
+                <a class="has-arrow" aria-expanded="false"><i class="icon-grid menu-icon"></i><span class="nav-text">Dashbord</span></a>
+                <ul aria-expanded="true">
+                    <li><a asp-page="/Index">Home</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" aria-expanded="false"><i class="icon-plus menu-icon"></i><span class="nav-text">Cadastros</span></a>
+                <ul aria-expanded="true">
+                    <li><a asp-page="/MetodoPagamento/Index">Método Pagamento</a></li>
+                    <li><a asp-page="/TipoLancamento/Index">Tipo Lançamento</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow" aria-expanded="false"><i class="icon-basket menu-icon"></i><span class="nav-text">Lançamentos</span></a>
+                <ul aria-expanded="true">
+                    <li><a asp-page="/Lancamento">Lançamento</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="has-arrow"><i class="icon-user menu-icon"></i><span class="nav-text">Usuario</span></a>
+                <ul>
+                    <li><a asp-page="/Usuario/Index">Profile</a></li>
+                    <li><a asp-page="/Autorizacao/Logout">Logout</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

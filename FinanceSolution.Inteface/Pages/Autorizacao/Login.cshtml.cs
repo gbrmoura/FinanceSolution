@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using FinanceSolution.Data;
 using FinanceSolution.Inteface.Services;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -31,7 +35,7 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
             return Page();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPost()
         {
             if (String.IsNullOrEmpty(Email) || String.IsNullOrEmpty(Senha))
             {
@@ -54,7 +58,20 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
                     return Page();
                 }
 
-                return Redirect("/Index");
+                var claims = new List<Claim>()
+                {
+                    new Claim("id", user.Codigo.ToString()),
+                    new Claim("name", user.Nome),
+                    new Claim("email", user.Email),
+                    new Claim("role", "USER")
+                };
+
+                var identity = new ClaimsIdentity(claims, "login");
+                var principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(principal);
+
+                return Redirect("/");
             }
             catch (Exception e)
             {

@@ -27,9 +27,29 @@ namespace FinanceSolution.Inteface
             services.AddDbContextPool<FinanceSolutionContext>((ops) => ops.UseMySQL(connection));
             services.AddRazorPages();
 
-
             /** Scoped Services  **/
             services.AddScoped<PasswordService>();
+
+            /** Authentication  **/
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+            {
+                options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+                options.ExpireTimeSpan = TimeSpan.FromDays(14);
+                options.LoginPath = "/Autorizacao/Login";
+                options.LogoutPath = "/Autorizacao/Logout";
+                options.AccessDeniedPath = "/";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+                options.Cookie.HttpOnly = true;
+            });
+
+            /** Session **/
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(7);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
 
         }
 
@@ -50,6 +70,9 @@ namespace FinanceSolution.Inteface
 
             app.UseRouting();
 
+            app.UseSession();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

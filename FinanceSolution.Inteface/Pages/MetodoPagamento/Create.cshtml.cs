@@ -1,15 +1,12 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FinanceSolution.Inteface.Pages
+namespace FinanceSolution.Inteface.Pages.MetodoPagamento
 {
-    [Authorize]
-    public class IndexModel : PageModel
+    public class CreateModel : PageModel
     {
         public void OnGet()
         {
-
         }
     }
 }

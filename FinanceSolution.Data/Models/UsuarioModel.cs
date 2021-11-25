@@ -7,7 +7,7 @@ namespace FinanceSolution.Data.Models
     public class UsuarioModel
     {
         [Key]
-        public Guid Codigo { get; set; }
+        public int Codigo { get; set; }
 
         [Required]
         [MaxLength(120)]

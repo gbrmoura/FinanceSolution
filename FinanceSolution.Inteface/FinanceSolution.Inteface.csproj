@@ -49,8 +49,4 @@
     <None Include="Pages\Index.cshtml" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Lancamento\" />
-  </ItemGroup>
-
 </Project>

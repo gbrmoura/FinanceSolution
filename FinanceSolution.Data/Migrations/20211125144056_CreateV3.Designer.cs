@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceSolution.Data.Migrations
 {
     [DbContext(typeof(FinanceSolutionContext))]
-    [Migration("20211118150809_CreateV2")]
-    partial class CreateV2
+    [Migration("20211125144056_CreateV3")]
+    partial class CreateV3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,18 +21,17 @@ namespace FinanceSolution.Data.Migrations
 
             modelBuilder.Entity("FinanceSolution.Data.Models.LancamentoArquivoModel", b =>
                 {
-                    b.Property<byte[]>("Codigo")
+                    b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Extensao")
                         .IsRequired()
                         .HasMaxLength(5)
                         .HasColumnType("varchar(5)");
 
-                    b.Property<byte[]>("LancamentoCodigo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("LancamentoCodigo")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -56,9 +55,9 @@ namespace FinanceSolution.Data.Migrations
 
             modelBuilder.Entity("FinanceSolution.Data.Models.LancamentoModel", b =>
                 {
-                    b.Property<byte[]>("Codigo")
+                    b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime");
@@ -68,13 +67,11 @@ namespace FinanceSolution.Data.Migrations
                         .HasMaxLength(120)
                         .HasColumnType("varchar(120)");
 
-                    b.Property<byte[]>("LancamentoTipoCodigo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("LancamentoTipoCodigo")
+                        .HasColumnType("int");
 
-                    b.Property<byte[]>("MetodoPagamentoCodigo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("MetodoPagamentoCodigo")
+                        .HasColumnType("int");
 
                     b.Property<string>("Observacao")
                         .IsRequired()
@@ -85,9 +82,8 @@ namespace FinanceSolution.Data.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(true);
 
-                    b.Property<byte[]>("UsuarioCodigo")
-                        .IsRequired()
-                        .HasColumnType("varbinary(16)");
+                    b.Property<int>("UsuarioCodigo")
+                        .HasColumnType("int");
 
                     b.Property<float>("Valor")
                         .HasColumnType("float");
@@ -105,9 +101,9 @@ namespace FinanceSolution.Data.Migrations
 
             modelBuilder.Entity("FinanceSolution.Data.Models.LancamentoTipoModel", b =>
                 {
-                    b.Property<byte[]>("Codigo")
+                    b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -128,9 +124,9 @@ namespace FinanceSolution.Data.Migrations
 
             modelBuilder.Entity("FinanceSolution.Data.Models.MetodoPagamentoModel", b =>
                 {
-                    b.Property<byte[]>("Codigo")
+                    b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -148,18 +144,13 @@ namespace FinanceSolution.Data.Migrations
 
             modelBuilder.Entity("FinanceSolution.Data.Models.UsuarioModel", b =>
                 {
-                    b.Property<byte[]>("Codigo")
+                    b.Property<int>("Codigo")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("varbinary(16)");
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

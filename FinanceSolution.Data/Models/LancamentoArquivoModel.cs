@@ -10,7 +10,7 @@ namespace FinanceSolution.Data.Models
     public class LancamentoArquivoModel
     {
         [Key]
-        public Guid Codigo { get; set; }
+        public int Codigo { get; set; }
         
         [Required]
         [MaxLength(120)]
@@ -24,7 +24,7 @@ namespace FinanceSolution.Data.Models
         public string Extensao { get; set; }
 
         [ForeignKey("Lancamento")]
-        public Guid LancamentoCodigo { get; set; }
+        public int LancamentoCodigo { get; set; }
         public LancamentoModel Lancamento { get; set; }
 
         private bool status = true;

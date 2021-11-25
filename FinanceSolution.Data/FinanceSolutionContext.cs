@@ -11,6 +11,8 @@ namespace FinanceSolution.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
+            base.OnModelCreating(modelBuilder);
+            
             modelBuilder.Entity<UsuarioModel>()
                 .Property(p => p.Status)
                 .HasDefaultValue(1);

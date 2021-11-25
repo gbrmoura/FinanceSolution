@@ -10,7 +10,7 @@ namespace FinanceSolution.Data.Models
     public class LancamentoTipoModel
     {
         [Key]
-        public Guid Codigo { get; set; }
+        public int Codigo { get; set; }
 
         [Required]
         [MaxLength(120)]

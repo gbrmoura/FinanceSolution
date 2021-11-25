@@ -13,22 +13,34 @@
             <a asp-page="Create" class="btn btn-primary">Novo</a>
         </p>
         <div class="col-md-12">
-            <div class="panel panel-filled">
-                <div class="panel-heading">
-                    <div class="panel-tools">
-                        <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Metodos de Pagamento</h4>
+                    <div class="table-responsive">
+                        <div class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table id="table-pagto" class="table table-striped table-bordered table-hover table-responsive-sm dataTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Descricao</th>
+                                                <th>Tipo</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            @* <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="DataTables_Table_0_info"></div>
+                                </div>
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"></div>
+                                </div>
+                            </div> *@
+                        </div>
                     </div>
-                    Metodos de Pagameto
-                </div>
-                <div class="panel-body">
-                    <table id="pagto" class="table table-striped table-hover table-responsive-sm">
-                        <thead>
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Descricao</th>
-                            </tr>
-                        </thead>
-                    </table>
                 </div>
             </div>
         </div>
@@ -36,21 +48,25 @@
 </div>
 
 @section scripts{
-    <script>
+
+    <script type="text/javascript">
+
     $(document).ready(function () {
-        var table = $("pagto").DataTable({
+
+        console.log('iniciou documento');
+
+        var table = $("table-pagto").DataTable({
             serverSide: true,
             lengthChange: false,
             processing: true,
             language: {
-                @* url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Portuguese-Brasil.json" *@
                 url: "/language/ptbr.json",
             },
             pageLength: 15,
             order: [],
-            rowId: "Id",
+            rowId: "Codigo",
             ajax: {
-                url: "/MetodoPagamento/Index?handler=Pagto",
+                url: "/MetodoPagamento/Index?handler=Pagtos",
                 type: "POST",
                 headers: {
                     RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
@@ -73,9 +89,16 @@
                     data: "Descricao",
                     bSortable: false,
                     autoWidth: true,
+                },
+                {
+                    data: "Tipo",
+                    bSortable: false,
+                    autoWidth: true,
                 }
             ]
         });
+
+        console.log(table);
     });
 </script>
 }

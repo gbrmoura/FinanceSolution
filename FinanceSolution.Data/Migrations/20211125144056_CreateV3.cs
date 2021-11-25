@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MySql.EntityFrameworkCore.Metadata;
 
 namespace FinanceSolution.Data.Migrations
 {
-    public partial class CreateV2 : Migration
+    public partial class CreateV3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +12,8 @@ namespace FinanceSolution.Data.Migrations
                 name: "LancamentoTipo",
                 columns: table => new
                 {
-                    Codigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    Codigo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Descricao = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Tipo = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true)
@@ -25,7 +27,8 @@ namespace FinanceSolution.Data.Migrations
                 name: "MetodoPagamento",
                 columns: table => new
                 {
-                    Codigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    Codigo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Descricao = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true)
                 },
@@ -38,11 +41,11 @@ namespace FinanceSolution.Data.Migrations
                 name: "Usuario",
                 columns: table => new
                 {
-                    Codigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    Codigo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Sobrenome = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    Login = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
                     Senha = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true)
                 },
@@ -55,14 +58,15 @@ namespace FinanceSolution.Data.Migrations
                 name: "Lancamento",
                 columns: table => new
                 {
-                    Codigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    Codigo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Descricao = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Valor = table.Column<float>(type: "float", nullable: false),
                     Data = table.Column<DateTime>(type: "datetime", nullable: false),
                     Observacao = table.Column<string>(type: "varchar(240)", maxLength: 240, nullable: false),
-                    LancamentoTipoCodigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
-                    MetodoPagamentoCodigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
-                    UsuarioCodigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    LancamentoTipoCodigo = table.Column<int>(type: "int", nullable: false),
+                    MetodoPagamentoCodigo = table.Column<int>(type: "int", nullable: false),
+                    UsuarioCodigo = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
@@ -92,11 +96,12 @@ namespace FinanceSolution.Data.Migrations
                 name: "LancamentoArquivo",
                 columns: table => new
                 {
-                    Codigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    Codigo = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Nome = table.Column<string>(type: "varchar(120)", maxLength: 120, nullable: false),
                     Stream = table.Column<string>(type: "text", nullable: false),
                     Extensao = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false),
-                    LancamentoCodigo = table.Column<byte[]>(type: "varbinary(16)", nullable: false),
+                    LancamentoCodigo = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true)
                 },
                 constraints: table =>

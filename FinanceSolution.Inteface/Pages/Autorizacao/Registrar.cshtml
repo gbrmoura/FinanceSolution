@@ -21,6 +21,7 @@
     <link href="~/css/style.css" rel="stylesheet">
     <link href="~/css/style.css.map" rel="stylesheet">
     <link href="~/plugins/toastr/css/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
 
 </head>
 <body>
@@ -74,54 +75,54 @@
         </div>
 
     <!-- Scripts -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     
     <!--- Quixlab Scripts  -->
-    <script src="~/js/custom.min.js"></script>
     <script src="~/js/settings.js"></script>
     <script src="~/js/gleek.js"></script>
     <script src="~/js/styleSwitcher.js"></script>
 
     <!-- Toastr Plugins -->
     <script src="~/plugins/toastr/js/toastr.min.js"></script>
-    <script src="~/plugins/toastr/js/toastr.init.js"></script>
+    <script src="~/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
     
     <script>
+        
 
         if ('@ViewData["success"]' == 'True') {
-            toastr.success('com sucesso', 'Criado', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
-                onHidden: function() {
-                    window.location.href = "/Autorizacao/Login";
-                }
+            Swal.fire({
+                title: 'Sucesso!',
+                text: 'Registro realizado com sucesso!',
+                type: 'success',
+            }).then(function() {
+                window.location.href = "/Autorizacao/Login";
             });
         }
 
         if ('@ViewData["emailInUse"]' == 'True') {
-            toastr.warning('Email já está em uso', 'Atenção', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Erro!',
+                text: 'E-mail já cadastrado!',
+                type: 'error',
             });
         }
         
         if ('@ViewData["error"]' == 'True') {
-            toastr.error('Verifique as informações e tente novamente', 'Ocorreu um erro', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu um erro ao realizar o registro!',
+                type: 'error',
             });
         }
 
         if ('@ViewData["internal"]' == 'True') {
-            toastr.error('Occoreu um erro inesperado', 'Contato Suporte', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Erro!',
+                text: 'Ocorreu um erro interno!',
+                type: 'error',
             });
         }
 

@@ -25,6 +25,7 @@
 
     <!-- Toastr Plugins -->
     <link href="~/plugins/toastr/css/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
 
 </head>
 <body class="h-100" data-theme-version="blue" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sibebarbg="color_1" data-sidebar-position="static" data-header-position="static" data-container="wide" direction="ltr">
@@ -68,6 +69,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -80,39 +82,39 @@
 
     <!-- Toastr Plugins -->
     <script src="~/plugins/toastr/js/toastr.min.js"></script>
-    <script src="~/plugins/toastr/js/toastr.init.js"></script>
+    <script src="~/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
 
     <script>
 
         if ('@ViewData["emailNotFound"]' == 'True') {
-            toastr.warning('Usuário não encontrado', 'Atenção', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Ops!',
+                text: 'Usuário não encontrado!',
+                type: 'error',
             });
         }
 
         if ('@ViewData["password"]' == 'True') {
-            toastr.warning('Senha invalida', 'Atenção', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Ops!',
+                text: 'Senha incorreta!',
+                type: 'error',
             });
         }
         
         if ('@ViewData["error"]' == 'True') {
-            toastr.warning('Verifique as informações e tente novamente', 'Ocorreu um erro', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Ops!',
+                text: 'Ocorreu um erro!',
+                type: 'error',
             });
         }
 
         if ('@ViewData["internal"]' == 'True') {
-            toastr.error('Occoreu um erro inesperado', 'Contato Suporte', {
-                timeOut: 2000,
-                preventDuplicates: true,
-                positionClass: 'toast-top-right',
+            Swal.fire({
+                title: 'Ops!',
+                text: 'Ocorreu um erro interno!',
+                type: 'error',
             });
         }
 

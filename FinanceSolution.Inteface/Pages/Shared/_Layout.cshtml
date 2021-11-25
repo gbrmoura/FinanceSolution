@@ -6,21 +6,19 @@
     <title>FinanceSolution</title>
 
    <!-- Styles -->
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/plugins/highlightjs/styles/darkula.css">
-    
-    <!--- Quixlab Styles  -->
-    <link rel="stylesheet" href="~/css/style.css">
-    <link rel="stylesheet" href="~/css/style.css.map">
+    <link rel="stylesheet" href="~/plugins/toastr/css/toastr.min.css" />
+    <link rel="stylesheet" href="~/plugins/highlightjs/styles/darkula.css" />
+    <link rel="stylesheet" href="~/plugins/highlightjs/styles/darcula.css" />
+    <link rel="stylesheet" href="~/plugins/datatables/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
 
-    <!-- Toastr Plugins -->
-    <link rel="stylesheet" href="~/plugins/toastr/css/toastr.min.css" >
-    <link rel="stylesheet" href="~/plugins/datatables/jquery.dataTables.min.css"></script>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/style.css.map" />
 
 </head>
 <body>
-
+    
     <!-- Place Holder Starter -->
     <div id="preloader" style="display: none;">
         <div class="loader">
@@ -43,44 +41,40 @@
         </aside>
 
         <!-- Main content-->
-        <section class="">
-
-            <!-- Main content -->
-            <div class="">
+        <div class="content-body" style="color: #76838f;">
+            <div class="container-fluid">
                 @RenderBody()
             </div>
-
-        </section>
+        </div>
     </div>
 
-    
-
-    <!-- Quixlab Lib -->
+    <!-- Quixlab Jquery -->
+    <script src="~/plugins/jquery/jquery.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     
     
     <!--- Quixlab Scripts  -->
-    @* <script src="~/js/custom.min.js"></script> *@
-    <script src="~/js/gleek.js"></script>
+    <script src="~/plugins/common/common.min.js"></script>
+    <script src="~/js/custom.min.js"></script>
     <script src="~/js/settings.js"></script>
-    <script src="~/js/site.js"></script>
     <script src="~/js/styleSwitcher.js"></script>
-    <script src="~/js/dashboard/dashboard-1.js"></script>
-    
 
-    <!-- Quixlab Plugins -->
+    <script src="~/js/site.js"></script>
+    <script src="~/js/gleek.js"></script>
+    <script src="~/js/plugins-init/toastr.init.js"></script>
+    
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/plugins/toastr/js/toastr.min.js"></script>
     <script src="~/plugins/toastr/js/toastr.init.js"></script>
-    <script src="~/plugins/common/common.min.js"></script>
-    <script src="~/plugins/highlightjs/highlight.pack.min.js"></script>
     <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/plugins/jquery/jquery.min.js"></script>
-
-    <script>
-        hljs.initHighlightingOnLoad();    
-    </script>
+    
+    <script src="~/plugins/highlightjs/highlight.pack.min.js"></script>
+    
+    <script src="~/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script> hljs.initHighlightingOnLoad(); </script>
+    
 </body>
 </html>

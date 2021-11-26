@@ -35,9 +35,9 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                 .ToList();
 
                 var result = pagto.Select(x => new {
-                    Codigo = x.Id,
-                    Descricao = x.Description,
-                    Tipo = x.Type
+                    Id = x.Id,
+                    Description = x.Description,
+                    Type = x.Type
                 });
 
                 var data = result

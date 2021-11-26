@@ -7,22 +7,20 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 
-namespace FinanceSolution.Inteface.Pages.Autorizacao
+namespace FinanceSolution.Inteface.Pages.Authorization
 {
-    public class RegistrarModel : PageModel
+    public class RegisterModel : PageModel
     {
 
         [BindProperty]
-        public UsuarioModel Usuario { get; set; }
+        public UserModel User { get; set; }
         private PasswordService password { get; set; }
         private FinanceSolutionContext context { get; set; }
-        private ILogger<RegistrarModel> log { get; set; }
 
-        public RegistrarModel(PasswordService password, FinanceSolutionContext context, ILogger<RegistrarModel> log)
+        public RegisterModel(PasswordService password, FinanceSolutionContext context)
         {
             this.password = password;
             this.context = context;
-            this.log = log;
         }
         
         public IActionResult OnGet()
@@ -40,14 +38,14 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
 
             try
             {
-                if (context.Usuario.Any((e) => e.Email.Equals(Usuario.Email)))
+                if (context.User.Any((e) => e.Username.Equals(User.Username)))
                 {
-                    ViewData["emailInUse"] = true;                  
+                    ViewData["userExists"] = true;                  
                     return Page();
                 }
 
-                Usuario.Senha = password.EncryptPassword(Usuario.Senha);
-                context.Usuario.Add(Usuario);
+                User.Password = password.EncryptPassword(User.Password);
+                context.User.Add(User);
                 context.SaveChanges();
 
                 ViewData["success"] = true;
@@ -55,7 +53,6 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
             }
             catch(Exception e)
             {
-                log.LogError(e, "Erro ao registrar usuario.");
                 ViewData["internal"] = true;
                 return Page();
             }

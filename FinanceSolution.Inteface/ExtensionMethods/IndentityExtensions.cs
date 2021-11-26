@@ -26,7 +26,7 @@ namespace FinanceSolution.Inteface.ExtensionMethods
 
         public static string GetShortUserEmail(this IIdentity identity)
         {
-            var claim = ((ClaimsIdentity)identity).FindFirst("email");
+            var claim = ((ClaimsIdentity)identity).FindFirst("username");
             return claim?.Value;
         }
     }

@@ -24,53 +24,9 @@
                 <a class="has-arrow" aria-expanded="false"><i class="icon-user menu-icon"></i><span class="nav-text">Usuario</span></a>
                 <ul>
                     <li class="nav-item"><a asp-page="/Usuario/Index">Profile</a></li>
-                    <li class="nav-item"><a asp-page="/Autorizacao/Logout">Logout</a></li>
+                    <li class="nav-item"><a asp-page="/Authorization/Logout">Logout</a></li>
                 </ul>
             </li>
         </ul>
     </div>
 </div>
-
-<script>
-
-    const currentMenu = [
-        {
-            menu: "Dashboard",
-            link: "/Index",
-            links: [
-                { link: "/", name: "Home" },
-                { link: "/Index", name: "Dashboard" },
-            ]
-        },
-        {
-            menu: "Metodos de Pagamento",
-            link: "/MetodoPagamento/Index",
-            links: [
-                { link: "/MetodoPagamento/Index", name: "Listar"},
-                { link: "/MetodoPagamento/Create", name: "Criar" },
-                { link: "/MetodoPagamento/Edit", name: "Editar"},
-            ]
-        },
-        {
-            menu: "Tipo de Lançamentos",
-            mainlink: "/TipoLancamento/Index",
-            links: [
-                { link: "/TipoLancamento/Index", name: "Listar" },
-                { link: "/TipoLancamento/Create", name: "Criar" },
-                { link: "/TipoLancamento/Edit", name: "Editar"},
-            ]
-        },
-        {
-            menu: "Lançamentos",
-            mainlink: "/Lancamento/Index",
-            links: [
-                { link: "/Lancamento/Index", name: "Listar" },
-                { link: "/Lancamento/Create", name: "Criar" },
-                { link: "/Lancamento/Edit", name: "Editar"},
-            ]
-        }
-    ];
-
-
-
-</script>

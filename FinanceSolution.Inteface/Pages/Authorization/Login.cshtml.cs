@@ -10,24 +10,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace FinanceSolution.Inteface.Pages.Autorizacao
+namespace FinanceSolution.Inteface.Pages.Authorization
 {
     public class LoginModel : PageModel
     {
         [BindProperty]
-        public string Email { get; set; }
+        public string Username { get; set; }
         [BindProperty]
-        public string Senha { get; set; }
+        public string Password { get; set; }
 
         private PasswordService password { get; set; }
         private FinanceSolutionContext context { get; set; }
-        private ILogger<LoginModel> log { get; set; }
-
-        public LoginModel(PasswordService password, FinanceSolutionContext context, ILogger<LoginModel> log)
+        public LoginModel(PasswordService password, FinanceSolutionContext context)
         {
             this.password = password;
             this.context = context;
-            this.log = log;
         }
 
         public IActionResult OnGet()
@@ -37,7 +34,7 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
 
         public async Task<IActionResult> OnPost()
         {
-            if (String.IsNullOrEmpty(Email) || String.IsNullOrEmpty(Senha))
+            if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
             {
                 ViewData["error"] = true;
                 return Page();
@@ -45,14 +42,14 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
 
             try
             {
-                var user = context.Usuario.FirstOrDefault(u => u.Email.Equals(Email));
+                var user = context.User.FirstOrDefault(u => u.Username.Equals(Username));
                 if (user == null)
                 {
-                    ViewData["emailNotFound"] = true;
+                    ViewData["userNotFound"] = true;
                     return Page();
                 }
 
-                if (!password.VerifyPassword(Senha, user.Senha))
+                if (!password.VerifyPassword(Password, user.Password))
                 {
                     ViewData["password"] = true;
                     return Page();
@@ -60,9 +57,9 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
 
                 var claims = new List<Claim>()
                 {
-                    new Claim("id", user.Codigo.ToString()),
-                    new Claim("name", user.Nome),
-                    new Claim("email", user.Email),
+                    new Claim("id", user.Id.ToString()),
+                    new Claim("name", user.Name),
+                    new Claim("username", user.Username),
                     new Claim("role", "USER")
                 };
 
@@ -75,7 +72,6 @@ namespace FinanceSolution.Inteface.Pages.Autorizacao
             }
             catch (Exception e)
             {
-                log.LogError(e, "Erro ao fazer login no sistema.");
                 ViewData["internal"] = true;
                 return Page();
             }

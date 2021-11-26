@@ -9,18 +9,21 @@
     <link rel="stylesheet" href="~/plugins/toastr/css/toastr.min.css" />
     <link rel="stylesheet" href="~/plugins/highlightjs/styles/darkula.css" />
     <link rel="stylesheet" href="~/plugins/highlightjs/styles/darcula.css" />
-    <link rel="stylesheet" href="~/plugins/datatables/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
+
+    <link rel="stylesheet" href="~/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" >
 
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/css/style.css.map" />
 
+    @RenderSection("styles", required: false)
+
 </head>
 <body>
     
     <!-- Place Holder Starter -->
-    <div id="preloader" style="display: none;">
+    <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
                 <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
@@ -49,9 +52,11 @@
     </div>
 
     <!-- Quixlab Jquery -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>  
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+
     <script src="~/plugins/jquery/jquery.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    
     
     <!--- Quixlab Scripts  -->
     <script src="~/plugins/common/common.min.js"></script>
@@ -61,16 +66,24 @@
 
     <script src="~/js/site.js"></script>
     <script src="~/js/gleek.js"></script>
-    <script src="~/js/plugins-init/toastr.init.js"></script>
     
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+       
+    <script src="~/js/plugins-init/toastr.init.js"></script>
     <script src="~/plugins/toastr/js/toastr.min.js"></script>
     <script src="~/plugins/toastr/js/toastr.init.js"></script>
+    
+    <script src="~/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+
     <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
-    
+    <script src="~/plugins/datatables.net/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
     <script src="~/plugins/highlightjs/highlight.pack.min.js"></script>
-    
     <script src="~/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
+
+    @* <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> *@
 
     @await RenderSectionAsync("Scripts", required: false)
 

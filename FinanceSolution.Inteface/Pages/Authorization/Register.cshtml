@@ -1,12 +1,10 @@
 ﻿@page
-@model FinanceSolution.Inteface.Pages.Autorizacao.LoginModel
+@model FinanceSolution.Inteface.Pages.Authorization.RegisterModel
 @{
     Layout = null;
 }
 
-
 <style> </style>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +20,11 @@
     <!--- Quixlab Styles  -->
     <link href="~/css/style.css" rel="stylesheet">
     <link href="~/css/style.css.map" rel="stylesheet">
-
-    <!-- Toastr Plugins -->
     <link href="~/plugins/toastr/css/toastr.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
 
 </head>
-<body class="h-100" data-theme-version="blue" data-layout="vertical" data-nav-headerbg="color_1" data-headerbg="color_1" data-sidebar-style="full" data-sibebarbg="color_1" data-sidebar-position="static" data-header-position="static" data-container="wide" direction="ltr">
+<body>
     
     <!-- Place Holder Starter -->
     <div id="preloader" style="display: none;">
@@ -39,34 +35,44 @@
         </div>
     </div>
 
-    <!-- Login Content -->
-    <div class="login-form-bg h-100">
+     <div class="login-form-bg h-100">
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                 <div class="col-xl-6">
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <h2>Finance Solution</h2>
-                                <form class="mt-5 mb-3 login-input" method="post">
-                                    <div class="form-group">
-                                        <input asp-for="Email" type="email" class="form-control" placeholder="E-mail" required>
-                                    </div>
+                                    <h2>Finance Solution</h2>
+        
+                                    <form class="mt-5 mb-3 login-input" method="post">
 
-                                    <div class="form-group">
-                                        <input asp-for="Senha" type="password" class="form-control" placeholder="Senha" required>
-                                    </div>
+                                        <div class="form-group">
+                                            <input asp-for="User.Name" type="text" class="form-control" placeholder="Nome" required="">
+                                        </div>
 
-                                    <button class="btn login-form__btn submit w-100" type="submit">Entrar</button>
-                                </form>
-                                <p class="mt-1 login-form__footer">Não tem Conta? <a href="/Autorizacao/Registrar" class="text-primary">Criar uma Conta</a> Agora!</p>
+                                        <div class="form-group">
+                                            <input asp-for="User.Lastname" type="text" class="form-control" placeholder="Sobrenome" required="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input asp-for="User.Username" type="text" class="form-control" placeholder="Nome de Usuário" required="">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input asp-for="User.Password" type="password" class="form-control" placeholder="Senha" required="">
+                                        </div>
+
+                                        <button class="btn login-form__btn submit w-100" type="submit">Registrar</button>
+                                    </form>
+                                    <p class="mt-1 login-form__footer">Já possui conta? <a href="/Authorization/Login" class="text-primary">Faça login!</a></p>
+                                    <p></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
     <!-- Scripts -->
     <script src="~/plugins/jquery/jquery.min.js"></script>
@@ -75,7 +81,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     
     <!--- Quixlab Scripts  -->
-    @* <script src="~/js/custom.min.js"></script> *@
     <script src="~/js/settings.js"></script>
     <script src="~/js/gleek.js"></script>
     <script src="~/js/styleSwitcher.js"></script>
@@ -83,42 +88,44 @@
     <!-- Toastr Plugins -->
     <script src="~/plugins/toastr/js/toastr.min.js"></script>
     <script src="~/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
-
+    
     <script>
+        
 
-        if ('@ViewData["emailNotFound"]' == 'True') {
+        if ('@ViewData["success"]' == 'True') {
             Swal.fire({
-                title: 'Ops!',
-                text: 'Usuário não encontrado!',
-                type: 'error',
+                title: 'Sucesso!',
+                text: 'Registro realizado com sucesso!',
+                type: 'success',
+            }).then(function() {
+                window.location.href = "/Authorization/Login";
             });
         }
 
-        if ('@ViewData["password"]' == 'True') {
+        if ('@ViewData["userExists"]' == 'True') {
             Swal.fire({
-                title: 'Ops!',
-                text: 'Senha incorreta!',
+                title: 'Erro!',
+                text: 'Usuario já cadastrado!',
                 type: 'error',
             });
         }
         
         if ('@ViewData["error"]' == 'True') {
             Swal.fire({
-                title: 'Ops!',
-                text: 'Ocorreu um erro!',
+                title: 'Erro!',
+                text: 'Ocorreu um erro ao realizar o registro!',
                 type: 'error',
             });
         }
 
         if ('@ViewData["internal"]' == 'True') {
             Swal.fire({
-                title: 'Ops!',
+                title: 'Erro!',
                 text: 'Ocorreu um erro interno!',
                 type: 'error',
             });
         }
 
     </script>
-
 </body>
 </html>

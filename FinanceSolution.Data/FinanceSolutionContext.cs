@@ -12,32 +12,10 @@ namespace FinanceSolution.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             base.OnModelCreating(modelBuilder);
-            
-            modelBuilder.Entity<UsuarioModel>()
-                .Property(p => p.Status)
-                .HasDefaultValue(1);
-            
-            modelBuilder.Entity<LancamentoModel>()
-                .Property(p => p.Status)
-                .HasDefaultValue(1);
-
-            modelBuilder.Entity<LancamentoTipoModel>()
-                .Property(p => p.Status)
-                .HasDefaultValue(1);
-            
-            modelBuilder.Entity<LancamentoArquivoModel>()
-                .Property(p => p.Status)
-                .HasDefaultValue(1);
-            
-            modelBuilder.Entity<MetodoPagamentoModel>()
-                .Property(p => p.Status)
-                .HasDefaultValue(1);
         }
 
-        public DbSet<UsuarioModel> Usuario { get; set; }
-        public DbSet<LancamentoModel> Lancamento { get; set; }
-        public DbSet<LancamentoArquivoModel> LancamentoArquivo { get; set; }
-        public DbSet<LancamentoTipoModel> LancamentoTipo { get; set; }
-        public DbSet<MetodoPagamentoModel> MetodoPagamento { get; set; }
+        public DbSet<UserModel> User { get; set; }
+        public DbSet<PaymentMethodModel> PaymentMethod { get; set; }
+
     }
 }

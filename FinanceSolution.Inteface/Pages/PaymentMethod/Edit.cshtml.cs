@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
@@ -33,23 +34,41 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
             return Page();
         }
 
-        // public IActionResult OnPost()
-        // {
-        //     if (!ModelState.IsValid)
-        //     {
-        //         ViewData["error"] = true;
-        //         return Page();
-        //     }
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewData["error"] = true;
+                return Page();
+            }
 
 
-        //     try
-        //     {
+            try
+            {   
+                var payment = _context.PaymentMethod
+                    .Where(e => e.Id == Payment.Id && e.IsDeleted == false)
+                    .SingleOrDefault();
 
-        //     }
-        //     catch ()
-        //     {
-            
-        //     }
-        // }
+                if (payment == null)
+                {
+                    ViewData["notFound"] = true;
+                    return Page();
+                }
+                
+                payment.Description = Payment.Description;
+                payment.IsModified = true;
+                payment.IsDeleted = false;
+
+                _context.SaveChanges();
+
+                ViewData["success"] = true;
+                return Page();
+            }
+            catch (Exception e)
+            {
+                ViewData["internal"] = true;
+                return Page();
+            }
+        }
     }
 }

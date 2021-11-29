@@ -36,7 +36,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
 
             try 
             {
-                if (_context.PaymentMethod.Any(x => x.Description == Payment.Description))
+                if (_context.PaymentMethod.Any(x => x.Description == Payment.Description && x.IsDeleted == false))
                 {
                     ViewData["inUse"] = true;
                     return Page();

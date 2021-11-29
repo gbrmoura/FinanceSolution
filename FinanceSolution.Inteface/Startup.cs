@@ -35,8 +35,8 @@ namespace FinanceSolution.Inteface
             {
                 options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 options.ExpireTimeSpan = TimeSpan.FromDays(14);
-                options.LoginPath = "/Autorizacao/Login";
-                options.LogoutPath = "/Autorizacao/Logout";
+                options.LoginPath = "/Authorization/Login";
+                options.LogoutPath = "/Authorization/Logout";
                 options.AccessDeniedPath = "/";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;

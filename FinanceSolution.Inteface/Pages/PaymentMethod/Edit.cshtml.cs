@@ -19,10 +19,10 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
         [BindProperty]
         public PaymentMethodModel Payment { get; set; }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet([FromQuery] int id)
         {
             Payment = _context.PaymentMethod
-                .Where(e => e.Id == id && e.IsDeleted == true)
+                .Where(e => e.Id == id && e.IsDeleted == false)
                 .SingleOrDefault();
 
             if (Payment == null)
@@ -41,7 +41,6 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                 ViewData["error"] = true;
                 return Page();
             }
-
 
             try
             {   

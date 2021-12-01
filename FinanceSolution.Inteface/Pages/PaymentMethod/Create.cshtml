@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label asp-for="Payment.Type" class="control-label">Tipo</label>
                         <select asp-for="Payment.Type" class="form-control input-default" required>
-                            <option value="1"></option>
+                            <option value="-1"></option>
                             <option value="@FinanceSolution.Data.Enums.PaymentMethodEnum.Money">Dinheiro</option>
                             <option value="@FinanceSolution.Data.Enums.PaymentMethodEnum.CreditCard">Cartão de Crédito</option>
                             <option value="@FinanceSolution.Data.Enums.PaymentMethodEnum.DebitCard">Cartão de Débito</option>

@@ -112,7 +112,7 @@
                     width: "5%",
                     render: function (data, type, row) {
                         return  '<div>' +
-                                    '<a href="/PaymentMethod/Edit?id="' + row.codigo + '"><i class="fa fa-pencil"></a>' +
+                                    `<a href="/PaymentMethod/Edit?id= ${ data.id }"><i class="fa fa-pencil"></a>` +
                                 '</div>';
                     }   
                 },
@@ -122,7 +122,7 @@
                     width: "5%",
                     render: function (data, type, row) {
                         return  '<div>' +
-                                    '<a href="/PaymentMethod/Edit?id="' + row.codigo + '"><i class="fa fa-remove"></a>' +
+                                    `<a href="/PaymentMethod/Delete?id=${ data.id }"><i class="fa fa-remove"></a>` +
                                 '</div>';
                     }   
                 }

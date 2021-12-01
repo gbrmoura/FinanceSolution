@@ -31,8 +31,8 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
             try
             {
                 List<PaymentMethodModel> pagto = context.PaymentMethod
-                .Where((e) => e.IsDeleted == false)
-                .ToList();
+                    .Where((e) => e.IsDeleted == false)
+                    .ToList();
 
                 var result = pagto.Select(x => new {
                     Id = x.Id,
@@ -50,7 +50,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     draw = model.draw,
                     recordsTotal = result.Count(),
                     recordsFiltered = result.Count(),
-                    data = result,
+                    data = data,
                 });
             } 
             catch (Exception e)

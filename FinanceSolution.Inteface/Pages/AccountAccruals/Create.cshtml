@@ -1,0 +1,91 @@
+﻿@page
+@model FinanceSolution.Inteface.Pages.AccountAccruals.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+
+<form method="post" enctype="multipart/form-data" id="scanForm">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Tipo de Lançamento</h4>
+                    <div class="form-group">
+                        <label asp-for="AccountAccruals.Description" class="control-label">Descrição</label>
+                        <input asp-for="AccountAccruals.Description" type="text" class="form-control input-default" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="AccountAccruals.Type" class="control-label">Tipo</label>
+                        <select asp-for="AccountAccruals.Type" class="form-control input-default" required>
+                            <option value="-1"></option>
+                            <option value="@FinanceSolution.Data.Enums.AccountAccrualsEnum.CashInFlow">Entrada</option>
+                            <option value="@FinanceSolution.Data.Enums.AccountAccrualsEnum.CashOutFlow">Saida</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top:20px; align-content:center">
+                        <button id="save-changes" class="btn btn-success" type="submit"> Criar </button>
+                        <button id="cancel-changes" class="btn btn-danger" type="button" > Cancelar </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+<script>
+    $(document).ready(function () {
+
+    });
+    
+    $('#cancel-changes').click(function () {
+        location.href = "/AccountAccruals/Index";
+    });
+
+    if ('@ViewData["success"]' == 'True') {
+        Swal.fire({
+            title: 'Sucesso!',
+            text: 'Tipo de lançamento criado com sucesso!',
+            type: 'success',
+            confirmButtonText: 'Ok'
+        }).then(function() {
+            window.location.href = "/AccountAccruals/Index";
+        });
+    }
+
+    if ('@ViewData["error"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Erro ao criar tipo de lançamento, confirme os dados e envie novamente!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+    if ('@ViewData["internal"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possivel cadastrar tipo de lançamento \n Erro interno do Servidor!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+    if ('@ViewData["inUse"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Já existe um tipo de lançamento com esta descrição!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+    
+
+</script>
+}

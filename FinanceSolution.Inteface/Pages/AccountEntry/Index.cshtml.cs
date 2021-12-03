@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using FinanceSolution.Data;
@@ -8,36 +9,41 @@ using FinanceSolution.Inteface.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FinanceSolution.Inteface.Pages.PaymentMethod
+namespace FinanceSolution.Inteface.Pages.AccountEntry
 {
     public class IndexModel : PageModel
     {
-        private FinanceSolutionContext _context;
-
+        private readonly FinanceSolutionContext _context;
+        
         public IndexModel(FinanceSolutionContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
         public IActionResult OnGet()
         {
             return Page();
-        }   
+        }
 
-        [HttpPost]
-        public async Task<JsonResult> OnPostPayment(DataTableAjaxPostModel model)
+        public async Task<JsonResult> OnPostEntrys(DataTableAjaxPostModel model)
         {
             try
             {
-                List<PaymentMethodModel> pagto = _context.PaymentMethod
+                List<AccountEntryModel> entry = _context.AccountEntry
+                    .Include(x => x.PaymentMethod)
+                    .Include(x => x.AccountFile)
+                    .Include(x => x.AccountAccrual)
                     .Where((e) => e.IsDeleted == false)
                     .ToList();
 
-                var result = pagto.Select(x => new {
+                var result = entry.Select(x => new {
                     Id = x.Id,
-                    Description = x.Description,
-                    Type = x.Type
+                    Value = x.Value,
+                    Date = x.Date,
+                    Accruals = x.AccountAccrual.Description,
+                    AccrualsType = x.AccountAccrual.Type,
+                    PaymentMethod = x.PaymentMethod.Description,
+                    PaymentType = x.PaymentMethod.Type
                 });
 
                 var data = result
@@ -52,7 +58,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     recordsFiltered = result.Count(),
                     data = data,
                 });
-            } 
+            }
             catch (Exception e)
             {
                 return new JsonResult(new
@@ -63,7 +69,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     Exception = e,
                 });
             }
-            
+
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿@page
-@model FinanceSolution.Inteface.Pages.PaymentMethod.IndexModel
+@model FinanceSolution.Inteface.Pages.AccountEntry.IndexModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Pages/Shared/_Layout.cshtml";
@@ -24,12 +24,14 @@
                         <div class="dataTables_wrapper container-fluid dt-bootstrap4">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <table id="table-pagto" class="table table-striped table-hover table-responsive-sm table-bordered dataTable" role="grid">
+                                    <table id="table-entry" class="table table-striped table-hover table-responsive-sm table-bordered dataTable" role="grid">
                                         <thead>
                                         <tr>
                                             <th>Codigo</th>
-                                            <th>Descricao</th>
+                                            <th>Data</th>
+                                            <th>Valor</th>
                                             <th>Tipo</th>
+                                            <th>Método de Pagamento</th>
                                             <th>Alterar</th>
                                             <th>Remover</th>
                                         </tr>
@@ -51,15 +53,15 @@
     $(document).ready(function () {
 
 
-        var table = $("#table-pagto").DataTable({
+        var table = $("#table-entry").DataTable({
             processing: true,
             serverSide: true,
             language: {
                 url: "/language/ptbr.json",
             },
-            rowId: "Codigo",
+            rowId: "id",
             ajax: {
-                url: "/PaymentMethod/Index?handler=Payment",
+                url: "/AccountEntry/Index?handler=Entrys",
                 type: "POST",
                 headers: {
                     RequestVerificationToken: $(
@@ -81,27 +83,24 @@
                     autoWidth: true,
                 },
                 {
-                    data: "description",
+                    data: "date",
                     bSortable: false,
                     autoWidth: true,
                 },
                 {
-                    data: "type",
+                    data: "value",
                     bSortable: false,
                     autoWidth: true,
-                    render: function (data, type, row) {
-                        if (data == 1) {
-                            return "Dinheiro";
-                        } else if (data == 2) {
-                            return "Cartão de Crédito";    
-                        } else if (data == 3) {
-                            return "Cartão de Débito";
-                        } else if (data == 4) {
-                            return "PIX";
-                        } else {
-                            return "";
-                        }
-                    }
+                },
+                {
+                    data: "accruals",
+                    bSortable: false,
+                    autoWidth: true,
+                },
+                {
+                    data: "paymentMethod",
+                    bSortable: false,
+                    autoWidth: true,
                 },
                 {
                     data: null,
@@ -109,7 +108,7 @@
                     width: "5%",
                     render: function (data, type, row) {
                         return  '<div>' +
-                                    `<a href="/PaymentMethod/Edit?id= ${ data.id }"><i class="fa fa-pencil"></a>` +
+                                    `<a href="/AccountAccruals/Edit?id= ${ data.id }"><i class="fa fa-pencil"></a>` +
                                 '</div>';
                     }   
                 },
@@ -119,7 +118,7 @@
                     width: "5%",
                     render: function (data, type, row) {
                         return  '<div>' +
-                                    `<a href="/PaymentMethod/Delete?id=${ data.id }"><i class="fa fa-remove"></a>` +
+                                    `<a href="/AccountAccruals/Delete?id=${ data.id }"><i class="fa fa-remove"></a>` +
                                 '</div>';
                     }   
                 }

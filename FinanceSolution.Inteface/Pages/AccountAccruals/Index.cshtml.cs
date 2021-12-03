@@ -1,36 +1,35 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
 using FinanceSolution.Inteface.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace FinanceSolution.Inteface.Pages.PaymentMethod
+namespace FinanceSolution.Inteface.Pages.AccountAccruals
 {
     public class IndexModel : PageModel
     {
-        private FinanceSolutionContext _context;
+
+        private readonly FinanceSolutionContext _context;
 
         public IndexModel(FinanceSolutionContext context)
         {
             _context = context;
         }
 
-        [HttpGet]
         public IActionResult OnGet()
         {
             return Page();
-        }   
+        }
 
-        [HttpPost]
-        public async Task<JsonResult> OnPostPayment(DataTableAjaxPostModel model)
+        public async Task<JsonResult> OnPostAccruals(DataTableAjaxPostModel model)
         {
             try
             {
-                List<PaymentMethodModel> pagto = _context.PaymentMethod
+                List<AccountAccrualsModel> pagto = _context.AccountAccruals
                     .Where((e) => e.IsDeleted == false)
                     .ToList();
 
@@ -52,7 +51,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     recordsFiltered = result.Count(),
                     data = data,
                 });
-            } 
+            }
             catch (Exception e)
             {
                 return new JsonResult(new
@@ -63,8 +62,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     Exception = e,
                 });
             }
-            
-        }
 
+        }
     }
 }

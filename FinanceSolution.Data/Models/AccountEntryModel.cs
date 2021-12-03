@@ -11,8 +11,11 @@ namespace FinanceSolution.Data.Models
         public int Id { get; set; }
         public float Value { get; set; }
         public DateTime Date { get; set; }
-        public AccountAccrualsEnum Accruals { get; set; }
         
+        [ForeignKey("AccountAccruals")]
+        public int AccountAccrualsId { get; set; }
+        public AccountAccrualsModel AccountAccrual { get; set; }
+
         [ForeignKey("PaymentMethod")]
         public int PaymentMethodId { get; set; }
         public PaymentMethodModel PaymentMethod { get; set; }

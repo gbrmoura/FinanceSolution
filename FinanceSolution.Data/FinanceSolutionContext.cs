@@ -16,6 +16,8 @@ namespace FinanceSolution.Data
 
         public DbSet<UserModel> User { get; set; }
         public DbSet<PaymentMethodModel> PaymentMethod { get; set; }
-
+        public DbSet<AccountAccrualsModel> AccountAccruals { get; set; }
+        public DbSet<AccountFileModel> AccountFile { get; set; }
+        public DbSet<AccountEntryModel> AccountEntry { get; set; }
     }
 }

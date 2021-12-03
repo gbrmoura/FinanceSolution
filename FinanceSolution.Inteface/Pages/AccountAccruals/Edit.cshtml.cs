@@ -5,7 +5,7 @@ using FinanceSolution.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace FinanceSolution.Inteface.Pages.PaymentMethod
+namespace FinanceSolution.Inteface.Pages.AccountAccruals
 {
     public class EditModel : PageModel
     {
@@ -17,15 +17,15 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
         }
 
         [BindProperty]
-        public PaymentMethodModel Payment { get; set; }
-
-        public IActionResult OnGet([FromQuery] int id)
+        public AccountAccrualsModel AccountAccrual { get; set; }
+        
+        public IActionResult OnGet(int id)
         {
-            Payment = _context.PaymentMethod
+            AccountAccrual = _context.AccountAccruals
                 .Where(e => e.Id == id && e.IsDeleted == false)
                 .SingleOrDefault();
 
-            if (Payment == null)
+            if (AccountAccrual == null)
             {
                 ViewData["notFound"] = true;
                 return Page();
@@ -44,20 +44,20 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
 
             try
             {   
-                var payment = _context.PaymentMethod
-                    .Where(e => e.Id == Payment.Id && e.IsDeleted == false)
+                var accountAccruals = _context.AccountAccruals
+                    .Where(e => e.Id == AccountAccrual.Id && e.IsDeleted == false)
                     .SingleOrDefault();
 
-                if (payment == null)
+                if (accountAccruals == null)
                 {
                     ViewData["notFound"] = true;
                     return Page();
                 }
                 
-                payment.Description = Payment.Description;
-                payment.Type = Payment.Type;
-                payment.IsModified = true;
-                payment.IsDeleted = false;
+                accountAccruals.Description = AccountAccrual.Description;
+                accountAccruals.Type = AccountAccrual.Type;
+                accountAccruals.IsModified = true;
+                accountAccruals.IsDeleted = false;
 
                 _context.SaveChanges();
 

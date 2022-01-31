@@ -1,6 +1,8 @@
-﻿namespace FinanceSolution.Inteface.Services
+﻿using FinanceSolution.Inteface.Interfaces;
+
+namespace FinanceSolution.Inteface.Services
 {
-    public class PasswordService
+    public class PasswordService : IPasswordService
     {
         public string EncryptPassword(string password)
         {

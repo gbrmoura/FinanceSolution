@@ -1,5 +1,6 @@
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
+using FinanceSolution.Inteface.Interfaces;
 using FinanceSolution.Inteface.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,13 +15,14 @@ namespace FinanceSolution.Inteface.Pages.Authorization
 
         [BindProperty]
         public UserModel User { get; set; }
-        private PasswordService password { get; set; }
-        private FinanceSolutionContext context { get; set; }
 
-        public RegisterModel(PasswordService password, FinanceSolutionContext context)
+        private readonly IPasswordService _password;
+        private readonly FinanceSolutionContext _context;
+
+        public RegisterModel(IPasswordService password, FinanceSolutionContext context)
         {
-            this.password = password;
-            this.context = context;
+            this._password = password;
+            this._context = context;
         }
         
         public IActionResult OnGet()
@@ -38,15 +40,15 @@ namespace FinanceSolution.Inteface.Pages.Authorization
 
             try
             {
-                if (context.User.Any((e) => e.Username.Equals(User.Username)))
+                if (_context.User.Any((e) => e.Username.Equals(User.Username)))
                 {
                     ViewData["userExists"] = true;                  
                     return Page();
                 }
 
-                User.Password = password.EncryptPassword(User.Password);
-                context.User.Add(User);
-                context.SaveChanges();
+                User.Password = _password.EncryptPassword(User.Password);
+                _context.User.Add(User);
+                _context.SaveChanges();
 
                 ViewData["success"] = true;
                 return Page();

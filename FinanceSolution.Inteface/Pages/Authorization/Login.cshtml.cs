@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FinanceSolution.Data;
+using FinanceSolution.Inteface.Interfaces;
 using FinanceSolution.Inteface.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -19,12 +20,13 @@ namespace FinanceSolution.Inteface.Pages.Authorization
         [BindProperty]
         public string Password { get; set; }
 
-        private PasswordService password { get; set; }
-        private FinanceSolutionContext context { get; set; }
-        public LoginModel(PasswordService password, FinanceSolutionContext context)
+        private readonly IPasswordService _password;
+        private readonly FinanceSolutionContext _context;
+
+        public LoginModel(IPasswordService password, FinanceSolutionContext context)
         {
-            this.password = password;
-            this.context = context;
+            this._password = password;
+            this._context = context;
         }
 
         public IActionResult OnGet()
@@ -42,14 +44,14 @@ namespace FinanceSolution.Inteface.Pages.Authorization
 
             try
             {
-                var user = context.User.FirstOrDefault(u => u.Username.Equals(Username));
+                var user = _context.User.SingleOrDefault(u => u.Username.Equals(Username));
                 if (user == null)
                 {
                     ViewData["userNotFound"] = true;
                     return Page();
                 }
 
-                if (!password.VerifyPassword(Password, user.Password))
+                if (!_password.VerifyPassword(Password, user.Password))
                 {
                     ViewData["password"] = true;
                     return Page();

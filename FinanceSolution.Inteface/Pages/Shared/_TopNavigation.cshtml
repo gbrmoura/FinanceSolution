@@ -1,11 +1,29 @@
+
+<style>
+    .rounded-circle {
+        height: 55px !important;
+        width: 55px !important;
+    }
+
+    .show > .dropdown-menu {
+        max-height: 800px;
+        visibility: visible;
+    }
+  
+    .dropdown-menu {
+        display: block;
+        max-height: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+    }
+
+</style>
+
 <!-- Nav Header -->
 <div class="nav-header">
     <div class="brand-logo">
-        <a asp-page="/Index">
-            <b class="logo-abbr"><img src="~/images/logo.png" alt=""> </b>
-            <span class="logo-compact"> <img src="~/images/logo-compact.png" alt=""> </span>
-            <span class="brand-title"> <img src="~/images/logo-text.png" alt=""> </span>
-        </a>
+        <a asp-page="/Index"></a>
     </div>
 </div>
 
@@ -20,7 +38,24 @@
 
         <!-- Profile -->
         <div class="header-right">
+            <ul class="clearfix">
+                <li class="icons dropdown">
+                    <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                        <span class="activity active"></span>
+                        <img class="rounded-circle" src="~/images/avatar/user.png" alt>
+                    </div>
 
+                    <div class="drop-down dropdown-profile dropdown-menu mt-2">
+                        <div class="dropdown-content-body">
+                            <ul>
+                                <li><a asp-page="/Authorization/Profile"><i class="fa fa-user"></i>Profile</a></li>
+                                <hr class="my-2">
+                                <li><a asp-page="/Authorization/Logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>

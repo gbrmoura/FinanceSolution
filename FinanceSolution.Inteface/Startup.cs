@@ -1,5 +1,6 @@
 using System;
 using FinanceSolution.Data;
+using FinanceSolution.Inteface.Interfaces;
 using FinanceSolution.Inteface.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +29,7 @@ namespace FinanceSolution.Inteface
             services.AddRazorPages();
 
             /** Scoped Services  **/
-            services.AddScoped<PasswordService>();
+            services.AddScoped<IPasswordService, PasswordService>();
 
             /** Authentication  **/
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
@@ -65,7 +66,7 @@ namespace FinanceSolution.Inteface
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();

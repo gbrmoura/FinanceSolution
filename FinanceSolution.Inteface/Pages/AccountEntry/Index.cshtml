@@ -7,6 +7,15 @@
 
 <style>
     th.dt-center, td.dt-center { text-align: center; }
+
+    .cash-in {
+        background-color: rgba(15, 255, 15, 0.14) !important;
+    }
+
+    .cash-out {
+        background-color: rgba(255, 15, 15, 0.14) !important;
+    }
+
 </style>
 
 @Html.AntiForgeryToken()
@@ -65,9 +74,7 @@
                 url: "/AccountEntry/Index?handler=Entrys",
                 type: "POST",
                 headers: {
-                    RequestVerificationToken: $(
-                        'input[name="__RequestVerificationToken"]'
-                    ).val(),
+                    RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
                 },
                 async: true,    
             },
@@ -94,9 +101,13 @@
                     autoWidth: true,
                 },
                 {
-                    data: "value",
+                    data: null,
                     bSortable: false,
                     autoWidth: true,
+                    render: function(data, type, row) {
+                        toggleColor(data.id, data.accrualsType);
+                        return 'R$ ' + data.value.toFixed(2).replace('.', ',');
+                    }
                 },
                 {
                     data: "accruals",
@@ -132,5 +143,18 @@
             ]
         });
     });
+
+    function  toggleColor(element, type) {
+ 
+        var tr =  $('#' + element);
+
+        if (type == 1) {
+            tr.addClass('cash-in');
+        } else if (type == 2) {
+            tr.addClass('cash-out');
+        }
+        
+    }
+
 </script>
 }

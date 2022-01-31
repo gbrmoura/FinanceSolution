@@ -38,7 +38,7 @@ namespace FinanceSolution.Inteface.Pages.AccountEntry
                     Id = x.Id,
                     Description = x.Description,
                     Value = x.Value,
-                    Date = x.Date,
+                    Date = x.Date.ToString("dd/MM/yyyy hh:mm tt"),
                     Accruals = x.AccountAccrual.Description,
                     AccrualsType = x.AccountAccrual.Type,
                     PaymentMethod = x.PaymentMethod.Description,

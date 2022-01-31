@@ -107,11 +107,6 @@
         const link = url.origin + menu.link;
         const allLinks = document.querySelectorAll('.nav-item a');
         const currentLink = [...allLinks].filter(e => e.href === link );
-        
-        console.log(menu);
-        console.log(link);
-        console.log(allLinks);
-        console.log(currentLink);
 
         /** final to set li active **/
         var a = currentLink[0];
@@ -119,9 +114,6 @@
 
         a.classList.add("active");
         li.classList.add("active");  
-
-        console.log(li);
-        
     }
 
 </script>

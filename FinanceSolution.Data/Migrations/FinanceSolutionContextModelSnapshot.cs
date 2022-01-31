@@ -46,17 +46,14 @@ namespace FinanceSolution.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("AccountAccrualId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AccountAccrualsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AccountFileId")
+                    b.Property<int>("AccountAccrualId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
@@ -74,8 +71,6 @@ namespace FinanceSolution.Data.Migrations
 
                     b.HasIndex("AccountAccrualId");
 
-                    b.HasIndex("AccountFileId");
-
                     b.HasIndex("PaymentMethodId");
 
                     b.ToTable("AccountEntry");
@@ -85,6 +80,9 @@ namespace FinanceSolution.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountEntryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Data")
@@ -103,6 +101,8 @@ namespace FinanceSolution.Data.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AccountEntryId");
 
                     b.ToTable("AccountFile");
                 });
@@ -171,11 +171,7 @@ namespace FinanceSolution.Data.Migrations
                 {
                     b.HasOne("FinanceSolution.Data.Models.AccountAccrualsModel", "AccountAccrual")
                         .WithMany()
-                        .HasForeignKey("AccountAccrualId");
-
-                    b.HasOne("FinanceSolution.Data.Models.AccountFileModel", "AccountFile")
-                        .WithMany()
-                        .HasForeignKey("AccountFileId")
+                        .HasForeignKey("AccountAccrualId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -187,9 +183,23 @@ namespace FinanceSolution.Data.Migrations
 
                     b.Navigation("AccountAccrual");
 
-                    b.Navigation("AccountFile");
-
                     b.Navigation("PaymentMethod");
+                });
+
+            modelBuilder.Entity("FinanceSolution.Data.Models.AccountFileModel", b =>
+                {
+                    b.HasOne("FinanceSolution.Data.Models.AccountEntryModel", "AccountEntry")
+                        .WithMany("AccountFile")
+                        .HasForeignKey("AccountEntryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AccountEntry");
+                });
+
+            modelBuilder.Entity("FinanceSolution.Data.Models.AccountEntryModel", b =>
+                {
+                    b.Navigation("AccountFile");
                 });
 #pragma warning restore 612, 618
         }

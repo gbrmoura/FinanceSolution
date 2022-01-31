@@ -29,22 +29,21 @@ namespace FinanceSolution.Inteface.Pages.AccountEntry
         {
             try
             {
-                List<AccountEntryModel> entry = _context.AccountEntry
-                    .Include(x => x.PaymentMethod)
-                    .Include(x => x.AccountFile)
+                var query = _context.AccountEntry.AsNoTracking()
                     .Include(x => x.AccountAccrual)
-                    .Where((e) => e.IsDeleted == false)
-                    .ToList();
+                    .Include(x => x.PaymentMethod)
+                    .Where((e) => e.IsDeleted == false);
 
-                var result = entry.Select(x => new {
+                var result = query.Select(x => new {
                     Id = x.Id,
+                    Description = x.Description,
                     Value = x.Value,
                     Date = x.Date,
                     Accruals = x.AccountAccrual.Description,
                     AccrualsType = x.AccountAccrual.Type,
                     PaymentMethod = x.PaymentMethod.Description,
                     PaymentType = x.PaymentMethod.Type
-                });
+                }).ToList();
 
                 var data = result
                     .Skip(model.start)

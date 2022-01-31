@@ -1,36 +1,43 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FinanceSolution</title>
 
-   <!-- Styles -->
-   <link rel="stylesheet" href="~/css/site.css" />
-   <link rel="stylesheet" href="~/css/style.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
 
-   <link rel="stylesheet" href="~/plugins/toastr/css/toastr.min.css" />
-   <link rel="stylesheet" href="~/plugins/highlightjs/styles/darkula.css" />
-   <link rel="stylesheet" href="~/plugins/highlightjs/styles/darcula.css" />
-   <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="~/plugins/toastr/css/toastr.min.css" />
+    <link rel="stylesheet" href="~/plugins/highlightjs/styles/darkula.css" />
+    <link rel="stylesheet" href="~/plugins/highlightjs/styles/darcula.css" />
+    <link rel="stylesheet" href="~/plugins/sweetalert2/dist/sweetalert2.min.css">
 
-   <link rel="stylesheet" href="~/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" >
+    <link rel="stylesheet" href="~/plugins/tables/css/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/css/fileinput-rtl.css">
+    <link rel="stylesheet" href="~/css/fileinput.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     @RenderSection("styles", required: false)
 
     <!-- Quixlab Jquery -->
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>  
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/plugins/jquery/jquery.min.js"></script>
 
 </head>
+
 <body>
-    
+
     <!-- Place Holder Starter -->
     <div id="preloader">
         <div class="loader">
             <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10"></circle>
+                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10">
+                </circle>
             </svg>
         </div>
     </div>
@@ -39,12 +46,12 @@
 
         <!-- Header -->
         <nav>
-            <partial name="_TopNavigation"/>
+            <partial name="_TopNavigation" />
         </nav>
 
         <!-- Navigation -->
         <aside>
-            <partial name="_MainNavigationMenu"/>
+            <partial name="_MainNavigationMenu" />
         </aside>
 
         <!-- Main content-->
@@ -54,7 +61,7 @@
             </div>
         </div>
     </div>
-    
+
     <!--- Quixlab Scripts  -->
     <script src="~/plugins/common/common.min.js"></script>
     <script src="~/js/custom.min.js"></script>
@@ -63,13 +70,13 @@
     <script src="~/js/styleSwitcher.js"></script>
 
     <!-- <script src="~/js/site.js"></script> -->
-    
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-       
+
     <script src="~/js/plugins-init/toastr.init.js"></script>
     <script src="~/plugins/toastr/js/toastr.min.js"></script>
     <script src="~/plugins/toastr/js/toastr.init.js"></script>
-    
+
     <script src="~/plugins/tables/js/jquery.dataTables.min.js"></script>
     <script src="~/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
 
@@ -79,10 +86,13 @@
 
     <script src="~/plugins/highlightjs/highlight.pack.min.js"></script>
     <script src="~/plugins/sweetalert2/dist/sweetalert2.min.js"></script>
-
-    @* <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script> *@
+    
+    <script src="~/js/fileinput.js"></script>
+    <script src="~/js/plugins/piexif.js"></script>
+    <script src="~/js/plugins/sortable.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
-    
+
 </body>
+
 </html>

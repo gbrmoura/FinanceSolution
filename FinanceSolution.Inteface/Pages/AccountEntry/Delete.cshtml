@@ -4,3 +4,51 @@
     ViewData["Title"] = "Delete";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
+
+@Html.AntiForgeryToken()
+
+@section scripts{
+<script>
+
+    if ('@ViewData["success"]' == 'True') {
+        Swal.fire({
+            title: 'Sucesso!',
+            text: 'Lançamento deletado com sucesso!',
+            type: 'success',
+            confirmButtonText: 'Ok'
+        }).then(function() {
+            window.location.href = "/AccountEntry/Index";
+        });
+    }
+
+    if ('@ViewData["notFound"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Lançamento não encontrado.',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        }).then(function() {
+            window.location.href = "/AccountEntry/Index";
+        });
+    }
+
+    if ('@ViewData["error"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Erro ao deletar lançamento!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+    if ('@ViewData["internal"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possivel deletar lançamento \n Erro interno do Servidor!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+</script>
+}

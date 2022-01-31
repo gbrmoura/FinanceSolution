@@ -5,12 +5,7 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<style>
-    th.dt-center, td.dt-center { text-align: center; }
-</style>
-
 @Html.AntiForgeryToken()
-
 
 @section scripts{
 <script>
@@ -49,7 +44,7 @@
     if ('@ViewData["internal"]' == 'True') {
         Swal.fire({
             title: 'Erro!',
-            text: 'Não foi possivel cadastrar tipo de lançamento \n Erro interno do Servidor!',
+            text: 'Não foi possivel deletar tipo de lançamento \n Erro interno do Servidor!',
             type: 'error',
             confirmButtonText: 'Ok'
         });

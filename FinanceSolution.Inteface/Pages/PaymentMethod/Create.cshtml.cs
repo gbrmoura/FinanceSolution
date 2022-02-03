@@ -3,6 +3,7 @@ using System.Linq;
 using FinanceSolution.Data;
 using FinanceSolution.Data.Enums;
 using FinanceSolution.Data.Models;
+using FinanceSolution.Inteface.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -41,6 +42,16 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     ViewData["inUse"] = true;
                     return Page();
                 }
+
+                var userId = Int16.Parse(User.Identity.GetUserId());
+                var user = _context.User.FirstOrDefault(x => x.Id == userId);
+
+                if (user == null) {
+                    ViewData["error"] = true;
+                    return Page();
+                }
+
+                Payment.UserId = user.Id;
 
                 _context.PaymentMethod.Add(Payment);
                 _context.SaveChanges();

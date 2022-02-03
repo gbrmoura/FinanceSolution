@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
+using FinanceSolution.Inteface.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -53,12 +54,21 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     ViewData["notFound"] = true;
                     return Page();
                 }
-                
+
+                var userId = Int16.Parse(User.Identity.GetUserId());
+                var user = _context.User.FirstOrDefault(x => x.Id == userId);
+
+                if (user == null) {
+                    ViewData["error"] = true;
+                    return Page();
+                }
+
                 payment.Description = Payment.Description;
                 payment.Type = Payment.Type;
+                payment.UserId = user.Id;
                 payment.IsModified = true;
                 payment.IsDeleted = false;
-
+                
                 _context.SaveChanges();
 
                 ViewData["success"] = true;

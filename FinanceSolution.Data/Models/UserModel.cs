@@ -23,7 +23,6 @@ namespace FinanceSolution.Data.Models
         [Required]
         public string Password { get; set; }
         public bool IsDeleted { get; set; }
-        public bool IsModified { get; set; }
-        
+        public bool IsModified { get; set; }        
     }
 }

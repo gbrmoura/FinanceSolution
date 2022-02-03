@@ -22,6 +22,10 @@ namespace FinanceSolution.Data.Models
         public int PaymentMethodId { get; set; }
         public PaymentMethodModel PaymentMethod { get; set; }
         public List<AccountFileModel> AccountFile { get; set; }
+
+        [ForeignKey("User")]
+        public int UserId { get; set; }
+        public UserModel User { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsModified { get; set; }
     }

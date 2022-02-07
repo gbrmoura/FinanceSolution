@@ -6,9 +6,9 @@ Finance Solution é uma pagina web com o intuito de ajudar seus usuarios a terem
 
 Possuindo uma interface simples, e de facil utilização.
 
-
-<img src="images/LoginPage.png">
-
+<p align="center">
+  <img src="Images/LoginPage.png" width="500" heigth="500" style="border-radius: 5px">
+</p>
 
 ## Banco de Dados
 

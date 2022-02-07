@@ -51,7 +51,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
                     return Page();
                 }
 
-                Payment.UserId = user.Id;
+                Payment.User = user;
 
                 _context.PaymentMethod.Add(Payment);
                 _context.SaveChanges();

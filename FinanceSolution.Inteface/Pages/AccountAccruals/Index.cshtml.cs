@@ -1,5 +1,6 @@
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
+using FinanceSolution.Inteface.ExtensionMethods;
 using FinanceSolution.Inteface.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -30,7 +31,7 @@ namespace FinanceSolution.Inteface.Pages.AccountAccruals
             try
             {
                 List<AccountAccrualsModel> pagto = _context.AccountAccruals
-                    .Where((e) => e.IsDeleted == false)
+                    .Where((e) => e.UserId == Int16.Parse(User.Identity.GetUserId()) && e.IsDeleted == false)
                     .ToList();
 
                 var result = pagto.Select(x => new {

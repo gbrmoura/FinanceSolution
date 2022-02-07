@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using FinanceSolution.Data;
+using FinanceSolution.Inteface.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -20,7 +21,7 @@ namespace FinanceSolution.Inteface.Pages.AccountAccruals
             try
             {
                 var accountAccruals = _context.AccountAccruals
-                    .Where(e => e.Id == id && e.IsDeleted == false)
+                    .Where(e => e.Id == id && e.UserId == Int16.Parse(User.Identity.GetUserId()) && e.IsDeleted == false)
                     .SingleOrDefault();
 
                 if (accountAccruals == null)

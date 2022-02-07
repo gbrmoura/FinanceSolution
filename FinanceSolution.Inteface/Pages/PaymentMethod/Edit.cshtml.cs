@@ -65,6 +65,7 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
 
                 payment.Description = Payment.Description;
                 payment.Type = Payment.Type;
+                payment.User = user;
                 payment.UserId = user.Id;
                 payment.IsModified = true;
                 payment.IsDeleted = false;

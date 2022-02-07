@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
+using FinanceSolution.Inteface.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -54,8 +55,14 @@ namespace FinanceSolution.Inteface.Pages.AccountAccruals
                     return Page();
                 }
                 
+                var userId = Int16.Parse(User.Identity.GetUserId());
+                var user = _context.User.FirstOrDefault(x => x.Id == userId);
+                
+
                 accountAccruals.Description = AccountAccrual.Description;
                 accountAccruals.Type = AccountAccrual.Type;
+                accountAccruals.UserId = user.Id;
+                accountAccruals.User = user;
                 accountAccruals.IsModified = true;
                 accountAccruals.IsDeleted = false;
 

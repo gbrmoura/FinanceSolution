@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinanceSolution.Data;
 using FinanceSolution.Data.Models;
+using FinanceSolution.Inteface.ExtensionMethods;
 using FinanceSolution.Inteface.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -29,10 +30,11 @@ namespace FinanceSolution.Inteface.Pages.AccountEntry
         {
             try
             {
+
                 var query = _context.AccountEntry.AsNoTracking()
                     .Include(x => x.AccountAccrual)
                     .Include(x => x.PaymentMethod)
-                    .Where((e) => e.IsDeleted == false);
+                    .Where((e) => e.UserId == Int16.Parse(User.Identity.GetUserId()) && e.IsDeleted == false);
 
                 var result = query.Select(x => new {
                     Id = x.Id,

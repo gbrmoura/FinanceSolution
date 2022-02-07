@@ -33,9 +33,9 @@ namespace FinanceSolution.Inteface.Pages.PaymentMethod
             try
             {
 
-                List<PaymentMethodModel> pagto = await _context.PaymentMethod
+                List<PaymentMethodModel> pagto = _context.PaymentMethod
                     .Where((e) => e.UserId == Int16.Parse(User.Identity.GetUserId()) && e.IsDeleted == false)
-                    .ToListAsync();
+                    .ToList();
 
                 var result = pagto.Select(x => new
                 {

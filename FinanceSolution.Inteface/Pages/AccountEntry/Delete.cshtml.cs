@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using FinanceSolution.Data;
 using System.Linq;
 using System;
+using FinanceSolution.Inteface.ExtensionMethods;
 
 namespace FinanceSolution.Inteface.Pages.AccountEntry
 {
@@ -19,8 +20,9 @@ namespace FinanceSolution.Inteface.Pages.AccountEntry
         {
             try
             {
+            
                 var accountEntry = _context.AccountEntry
-                    .Where(e => e.Id == id && e.IsDeleted == false)
+                    .Where(e => e.Id == id && e.UserId == Int16.Parse(User.Identity.GetUserId()) && e.IsDeleted == false)
                     .SingleOrDefault();
 
                 if (accountEntry == null)

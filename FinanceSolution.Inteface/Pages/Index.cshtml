@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    @*  *@
+    @* *@
     <div class="col-md-3 col-sm-6">
         <div class="card">
             <div class="card-body">
@@ -32,12 +32,13 @@
                     <h2 class="text-black">@Model.CashIn</h2>
                     <p class="text-black mb-0">@Model.Date</p>
                 </div>
-                <span class="float-right display-5 opacity-5"><i class="fa fa-chevron-up" style="color: green;"></i></span>
+                <span class="float-right display-5 opacity-5"><i class="fa fa-chevron-up"
+                        style="color: green;"></i></span>
             </div>
         </div>
     </div>
 
-    @*  *@
+    @* *@
     <div class="col-md-3 col-sm-6">
         <div class="card">
             <div class="card-body">
@@ -46,7 +47,8 @@
                     <h2 class="text-black">@Model.CashOut</h2>
                     <p class="text-black mb-0">@Model.Date</p>
                 </div>
-                <span class="float-right display-5 opacity-5"><i class="fa fa-chevron-down" style="color: red;"></i></i></span>
+                <span class="float-right display-5 opacity-5"><i class="fa fa-chevron-down"
+                        style="color: red;"></i></i></span>
             </div>
         </div>
     </div>
@@ -60,9 +62,12 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Grafico de Entrada e Saida</h4>
-                <div class="flot-chart">
-                    <div class="flot-chart-content" id="flot-area-chart"></div>
-                </div>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="chart-area-graph" height="90px" class="chartjs-render-monitor"></canvas>
+            </div>
+            <div class="card-body">
+
             </div>
         </div>
     </div>
@@ -97,8 +102,110 @@
 
 </div>
 
+@section scripts{
 <script>
+    
+    function getDaysOfMonth(month, year) {
+        var date = new Date(year, month, 1);
+        var days = [0];
+        var day = 0;
+        while (date.getMonth() === month) {
+            day = day + 1;
+            days.push(day);
+            date.setDate(date.getDate() + 1);
+        }
+        return days;
+    }
+
+    function getDaysInMonth(month, year) {
+        var date = new Date(year, month, 1);
+        var days = [];
+        while (date.getMonth() === month) {
+            days.push(new Date(date));
+            date.setDate(date.getDate() + 1);
+        }
+        return days;
+    }
 
     // TODO: fazer os graficos
+    function GraphAreaCashFlow() {
+        $.ajax({
+            url: `/Index?handler=ChartAreaCashFlow`,
+            type: 'POST',
+            headers:  {
+                RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+            }
+        }).done(function (payload) {
+            
+            var entry = payload.data;
+
+            var date = new Date();
+            const labels = getDaysOfMonth(date.getMonth(), date.getFullYear());
+            const dates = getDaysInMonth(date.getMonth(), date.getFullYear());
+            
+            const cashIn = [0];
+            const cashOut = [0];
+            var cash = 0;
+
+            dates.forEach(function (date) {
+                
+                cash = 0;
+                entry.forEach(function (item) {
+                    if (new Date(date).toLocaleDateString() == new Date(item.date).toLocaleDateString() && item.accountAccrual.type == 1) {
+                        cash = item.value;
+                    }
+                });
+
+                cashIn.push(cash);
+
+                cash = 0;
+                entry.forEach(function (item) {
+                    if (new Date(date).toLocaleDateString() == new Date(item.date).toLocaleDateString() && item.accountAccrual.type == 2) {
+                        cash = item.value;
+                    }
+                });
+                
+                cashOut.push(cash);
+            });
+
+            console.log(cashIn);
+            console.log(cashOut);
+
+            const data = {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Entrada',
+                        borderColor: 'rgba(45, 206, 137, 1)',
+                        backgroundColor: 'rgba(45, 206, 137, 0.50)',
+                        data: cashIn,
+                    },
+                    {
+                        label: 'Saida',
+                        borderColor: 'rgba(236, 12, 56, 1)',
+                        backgroundColor: 'rgba(236, 12, 56, 0.50)',
+                        data: cashOut,
+                    }
+                ]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {}
+            };
+
+            const chart = new Chart(document.getElementById('chart-area-graph'), config);
+
+        }).fail(function () {
+
+        });
+    }
+
+    $(document).ready(function () {
+        GraphAreaCashFlow();
+    });
+
 
 </script>
+}

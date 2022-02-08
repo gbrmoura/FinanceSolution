@@ -33,14 +33,10 @@ namespace FinanceSolution.Inteface.Pages
 
         public void OnGet()
         {
-            this.Date = DateTime.Now.ToString("MM/yyyy");
-            
-            // TODO: colocar filtro do mes
-            var entrys = _context.AccountEntry
-                .Where(x => (x.Date.Month == DateTime.Now.Month && x.Date.Year == DateTime.Now.Year))
-                .Include(x => x.AccountAccrual)
-                .ToList();
-            
+            var date = DateTime.Now;
+            var query = _context.AccountEntry.Include(x => x.AccountAccrual).ToList();
+            var entrys = query.Where(x => x.Date.Year == date.Year && x.Date.Month == date.Month).ToList();
+
             var cashIn = entrys.Where(x => x.AccountAccrual.Type == Data.Enums.AccountAccrualsEnum.CashInFlow).Sum(x => x.Value);
             var cashOut = entrys.Where(x => x.AccountAccrual.Type == Data.Enums.AccountAccrualsEnum.CashOutFlow).Sum(x => x.Value);
             var amount = cashIn - cashOut;
@@ -48,7 +44,7 @@ namespace FinanceSolution.Inteface.Pages
             this.CashIn = cashIn.ToString("C");
             this.CashOut = cashOut.ToString("C");
             this.Amount = amount.ToString("C");
-            
+            this.Date = date.ToString("MM/yyyy");
 
         }
     }

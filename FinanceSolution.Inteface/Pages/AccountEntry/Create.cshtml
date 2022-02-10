@@ -44,7 +44,7 @@
                             <option value=""></option>
                             @foreach (var method in Model.AccountPayments)
                             {
-                                <option value="@method.Id">@method.Description</option>
+                                <option value="@method.Id">[ @Model.GetPaymentMethodType(method.Type) ] @method.Description</option>
                             }
                         </select>
                     </div>
@@ -56,7 +56,7 @@
                             <option value=""></option>
                             @foreach (var accruls in Model.AccountAccruals)
                             {
-                                <option value="@accruls.Id">@accruls.Description</option>
+                                <option value="@accruls.Id">[ @Model.GetAccountAccrualType(accruls.Type) ] @accruls.Description</option>
                             }
                         </select>
                     </div>

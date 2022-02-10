@@ -8,6 +8,12 @@
                 </ul>
             </li>
             <li>
+                <a href="history" class="has-arrow" aria-expanded="false"><i class="icon-calculator menu-icon"></i><span class="nav-text">Histórico</span></a>
+                <ul id="history">
+                    <li class="nav-item"><a asp-page="/History/AccountEntry">Lançamentos</a></li>
+                </ul>
+            </li>
+            <li>
                 <a href="registers" class="has-arrow" aria-expanded="false"><i class="icon-plus menu-icon"></i><span class="nav-text">Cadastros</span></a>
                 <ul id="registers">
                     <li class="nav-item"><a asp-page="/PaymentMethod/Index">Método Pagamento</a></li>
@@ -15,6 +21,7 @@
                     <li class="nav-item"><a asp-page="/AccountEntry/Index">Lançamento</a></li>
                 </ul>
             </li>
+            
         </ul>
     </div>
 </div>
@@ -73,6 +80,15 @@
             type: submenu,
             submenuId: "registers",
         },
+        {
+            menu: "Lançamentos",
+            link: "/History/AccountEntry",
+            links: [
+                { link: "/History/AccountEntry" },
+            ],
+            type: submenu,
+            submenuId: "history",
+        }
     ];
 
     /** function to find current menu **/

@@ -12,7 +12,56 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
+                    
                     <h4 class="card-title">Lançamento</h4>
+                    <input type="hidden" asp-for="AccountEntry.Id" />
+
+                    @* description *@
+                    <div class="form-group">
+                        <label asp-for="AccountEntry.Description" class="control-label">Descrição</label>
+                        <input asp-for="AccountEntry.Description" type="text" class="form-control input-default" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            @* date *@
+                            <div class="form-group">
+                                <label asp-for="AccountEntry.Date" class="control-label">Data</label>
+                                <input asp-for="AccountEntry.Date" type="datetime-local" class="form-control input-default" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            @* value *@
+                            <div class="form-group">
+                                <label asp-for="AccountEntry.Value" class="control-label">Valor</label>
+                                <input asp-for="AccountEntry.Value" type="number" min="1" step="any" class="form-control input-default" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* payment method *@
+                    <div class="form-group">
+                        <label asp-for="AccountEntry.PaymentMethodId" class="control-label">Método de Pagamento</label>
+                        <select asp-for="AccountEntry.PaymentMethodId" class="form-control input-default" required>
+                            <option value=""></option>
+                            @foreach (var method in Model.AccountPayments)
+                            {
+                                <option value="@method.Id">[ @Model.GetPaymentMethodType(method.Type) ] @method.Description</option>
+                            }
+                        </select>
+                    </div>
+
+                    @* account accrual *@
+                    <div class="form-group">
+                        <label asp-for="AccountEntry.AccountAccrualId" class="control-label">Tipo de Lançamento</label>
+                        <select asp-for="AccountEntry.AccountAccrualId" class="form-control input-default"required>
+                            <option value=""></option>
+                            @foreach (var accruls in Model.AccountAccruals)
+                            {
+                                <option value="@accruls.Id">[ @Model.GetAccountAccrualType(accruls.Type) ] @accruls.Description</option>
+                            }
+                        </select>
+                    </div>
 
                     <div style="margin-top:20px; align-content:center">
                         <button id="save-changes" class="btn btn-success" type="submit"> Alterar </button>
@@ -73,6 +122,24 @@
             confirmButtonText: 'Ok'
         }).then(function() {
             window.location.href = "/AccountEntry/Index";
+        });
+    }
+
+    if ('@ViewData["accountaccruals"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Tipo de lançamento não encontrado!',
+            type: 'error',
+            confirmButtonText: 'Ok'
+        });
+    }
+
+    if ('@ViewData["accountpayments"]' == 'True') {
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Método de pagamento não encontrado!',
+            type: 'error',
+            confirmButtonText: 'Ok'
         });
     }
 

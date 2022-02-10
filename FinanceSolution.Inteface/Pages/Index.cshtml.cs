@@ -13,7 +13,7 @@ namespace FinanceSolution.Inteface.Pages
     [Authorize]
     public class IndexModel : PageModel
     {
-        
+
         private readonly FinanceSolutionContext _context;
         public IndexModel(FinanceSolutionContext context)
         {
@@ -22,7 +22,7 @@ namespace FinanceSolution.Inteface.Pages
 
         [BindProperty]
         public string Date { get; set; }
-        
+
         [BindProperty]
         public string Amount { get; set; }
 
@@ -55,7 +55,7 @@ namespace FinanceSolution.Inteface.Pages
 
         }
 
-        public async Task<IActionResult> OnPostChartAreaCashFlow() 
+        public async Task<IActionResult> OnPostChartAreaCashFlow()
         {
             try
             {
@@ -68,7 +68,7 @@ namespace FinanceSolution.Inteface.Pages
                     .Where(x => x.UserId == Int16.Parse(User.Identity.GetUserId()) && x.IsDeleted == false)
                     .Where(x => x.Date >= firstDateOfMonth && x.Date <= lastDateOfMonth)
                     .ToList();
-                
+
                 return new JsonResult(new
                 {
                     data = query,
@@ -87,5 +87,42 @@ namespace FinanceSolution.Inteface.Pages
                 });
             }
         }
+
+        public async Task<IActionResult> OnPostChartPizzaCashFlow(string type)
+        {
+
+            try
+            {
+                var date = DateTime.Now;
+                var firstDateOfMonth = new DateTime(date.Year, date.Month, 1);
+                var lastDateOfMonth = firstDateOfMonth.AddMonths(1).AddDays(-1);
+                var typeEnum = Enum.Parse<Data.Enums.AccountAccrualsEnum>(type);
+
+                var query = _context.AccountEntry
+                    .Include(x => x.AccountAccrual)
+                    .Where(x => x.UserId == Int16.Parse(User.Identity.GetUserId()) && x.IsDeleted == false && x.AccountAccrual.Type == typeEnum)
+                    .Where(x => x.Date >= firstDateOfMonth && x.Date <= lastDateOfMonth)
+                    .ToList();
+
+                return new JsonResult(new
+                {
+                    data = query,
+                    recordsTotal = query.Count(),
+                    recordsFiltered = query.Count(),
+                });
+
+            }
+            catch (Exception e)
+            {
+                return new JsonResult(new
+                {
+                    recordsTotal = 0,
+                    recordsFiltered = 0,
+                    Exception = e,
+                });
+            }
+
+        }
+
     }
 }

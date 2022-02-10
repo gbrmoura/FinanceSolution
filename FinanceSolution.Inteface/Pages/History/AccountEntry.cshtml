@@ -1,0 +1,85 @@
+@page
+@model FinanceSolution.Inteface.Pages.History.AccountEntryModel
+@{
+    ViewData["Title"] = "";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header bg-white mt-2">
+                <h3 class="card-title text-black">Filtros</h3>
+            </div>
+            <div class="card-body">
+                
+                @* Data picker start *@
+                <input type="datetime-local">
+
+                @* Data picker end *@
+                <input type="datetime-local">
+
+                @* Search button *@
+                <button class="btn btn-primary"><i class="fa fa-search" style="font-size: 2em;"></i></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+
+    @* Total *@
+    <div class="col-md-3 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-black">Saldo Total</h3>
+                <div class="d-inline-block">
+                    <h2 class="text-black">@Model.Amount</h2>
+                </div>
+                <span class="float-right display-5 opacity-5"><i class="fa fa-balance-scale"></i></i></span>
+            </div>
+        </div>
+    </div>
+
+    @* *@
+    <div class="col-md-3 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-black">Saldo Total</h3>
+                <div class="d-inline-block">
+                    <h2 class="text-black">@Model.CashIn</h2>
+                </div>
+                <span class="float-right display-5 opacity-5"><i class="fa fa-chevron-up"
+                        style="color: green;"></i></span>
+            </div>
+        </div>
+    </div>
+
+    @* *@
+    <div class="col-md-3 col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-black">Saida</h3>
+                <div class="d-inline-block">
+                    <h2 class="text-black">@Model.CashOut</h2>
+                </div>
+                <span class="float-right display-5 opacity-5">
+                    <i class="fa fa-chevron-down" style="color: red;"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+<script>
+
+
+</script>
+}

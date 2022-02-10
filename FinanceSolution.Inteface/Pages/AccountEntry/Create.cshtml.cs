@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using FinanceSolution.Data;
+using FinanceSolution.Data.Enums;
 using FinanceSolution.Data.Models;
 using FinanceSolution.Inteface.ExtensionMethods;
 using Microsoft.AspNetCore.Mvc;
@@ -92,6 +93,36 @@ namespace FinanceSolution.Inteface.Pages.AccountEntry
             {
                 ViewData["internal"] = true;
                 return Page();
+            }
+        }
+
+        public string GetPaymentMethodType(PaymentMethodEnum type)
+        {
+            switch(type)
+            {
+                case PaymentMethodEnum.Money:
+                    return "Dinheiro";
+                case PaymentMethodEnum.CreditCard:
+                    return "Cartão de Crédito";
+                case PaymentMethodEnum.DebitCard:
+                    return "Cartão de Débito";
+                case PaymentMethodEnum.PIX:
+                    return "PIX";
+                default:
+                    return "";
+            }
+        }
+
+        public string GetAccountAccrualType(AccountAccrualsEnum type)
+        {
+            switch(type)
+            {
+                case AccountAccrualsEnum.CashInFlow:
+                    return "Entrada";
+                case AccountAccrualsEnum.CashOutFlow:
+                    return "Saída";
+                default:
+                    return "";
             }
         }
 

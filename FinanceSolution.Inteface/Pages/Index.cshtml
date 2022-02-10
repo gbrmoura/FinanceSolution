@@ -60,14 +60,12 @@
     @* Total *@
     <div class="col-md-12 col-sm-12">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header bg-white mt-2">
                 <h4 class="card-title">Grafico de Entrada e Saida</h4>
+                <h6 class="card-subtitle text-muted">@Model.Date</h6>
             </div>
-            <div class="chart-wrapper">
+            <div style="padding: 0px 10px 10px 10px;">
                 <canvas id="chart-area-graph" height="90px" class="chartjs-render-monitor"></canvas>
-            </div>
-            <div class="card-body">
-
             </div>
         </div>
     </div>
@@ -79,11 +77,12 @@
     @* Grafico de Entrada *@
     <div class="col-md-6 col-sm-6">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header bg-white mt-2">
                 <h4 class="card-title">Grafico de Entrada</h4>
-                <div class="flot-chart">
-                    <div class="flot-chart-content" id="flot-pie-chart"></div>
-                </div>
+                <h6 class="card-subtitle text-muted">@Model.Date</h6>
+            </div>
+            <div style="padding: 0px 20px 20px 20px;">
+                <canvas id="chart-pizza-in" height="160px" class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
@@ -91,11 +90,12 @@
     @* Grafico de Saida *@
     <div class="col-md-6 col-sm-6">
         <div class="card">
-            <div class="card-body">
+            <div class="card-header bg-white mt-2">
                 <h4 class="card-title">Grafico de Saida</h4>
-                <div class="flot-chart">
-                    <div class="flot-chart-content" id="flot-pie-chart"></div>
-                </div>
+                <h6 class="card-subtitle text-muted">@Model.Date</h6>
+            </div>
+            <div style="padding: 0px 10px 10px 10px;">
+                <canvas id="chart-pizza-out" height="160px" class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
@@ -127,7 +127,14 @@
         return days;
     }
 
-    // TODO: fazer os graficos
+    function getRandomColor() {
+        var o = Math.round;
+        var r = Math.random;
+        var s = 255;
+
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    } 
+
     function GraphAreaCashFlow() {
         $.ajax({
             url: `/Index?handler=ChartAreaCashFlow`,
@@ -152,7 +159,7 @@
                 cash = 0;
                 entry.forEach(function (item) {
                     if (new Date(date).toLocaleDateString() == new Date(item.date).toLocaleDateString() && item.accountAccrual.type == 1) {
-                        cash = item.value;
+                        cash += item.value;
                     }
                 });
 
@@ -161,15 +168,12 @@
                 cash = 0;
                 entry.forEach(function (item) {
                     if (new Date(date).toLocaleDateString() == new Date(item.date).toLocaleDateString() && item.accountAccrual.type == 2) {
-                        cash = item.value;
+                        cash += item.value;
                     }
                 });
                 
                 cashOut.push(cash);
             });
-
-            console.log(cashIn);
-            console.log(cashOut);
 
             const data = {
                 labels: labels,
@@ -202,8 +206,150 @@
         });
     }
 
+    function GraphPizzaCashIn() {
+
+        $.ajax({
+            url: `/Index?handler=ChartPizzaCashFlow`,
+            type: 'POST',
+            data: {
+                Type: 'CashInFlow'
+            },
+            headers:  {
+                RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+            }
+        }).done(function (payload) {
+            const entry = payload.data;
+            console.log(entry);
+        
+            const labels = [];
+            const values = [];
+            const colors = [];
+
+            entry.forEach(function (item) {
+                if (labels.indexOf(item.accountAccrual.description) < 0) {
+                    labels.push(item.accountAccrual.description);
+                }
+            });
+
+            labels.forEach(function (label) {
+                
+                var amount = entry.filter(function (item) {
+                    return item.accountAccrual.description == label;
+                });
+
+                var totalAmount = amount.map(x => x.value).reduce(function (prev, next) {
+                    return prev + next;
+                });
+
+                values.push(totalAmount);
+                colors.push(getRandomColor());
+            });
+
+            const config = {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: values,
+                            backgroundColor: colors,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#333",
+                            fontSize: 16
+                        }
+                    }
+                }
+            };
+
+            const chart = new Chart(document.getElementById('chart-pizza-in'), config);
+
+        }).fail(function () {
+
+        });
+    }
+
+    function GraphPizzaCashOut() {
+
+        $.ajax({
+            url: `/Index?handler=ChartPizzaCashFlow`,
+            type: 'POST',
+            data: {
+                Type: 'CashOutFlow'
+            },
+            headers:  {
+                RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val(),
+            }
+        }).done(function (payload) {
+            const entry = payload.data;
+            console.log(entry);
+        
+            const labels = [];
+            const values = [];
+            const colors = [];
+
+            entry.forEach(function (item) {
+                if (labels.indexOf(item.accountAccrual.description) < 0) {
+                    labels.push(item.accountAccrual.description);
+                }
+            });
+
+            labels.forEach(function (label) {
+                
+                var amount = entry.filter(function (item) {
+                    return item.accountAccrual.description == label;
+                });
+
+                var totalAmount = amount.map(x => x.value).reduce(function (prev, next) {
+                    return prev + next;
+                });
+
+                values.push(totalAmount);
+                colors.push(getRandomColor());
+            });
+
+            const config = {
+                type: 'doughnut',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: values,
+                            backgroundColor: colors,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#333",
+                            fontSize: 16
+                        }
+                    }
+                }
+            };
+
+            const chart = new Chart(document.getElementById('chart-pizza-out'), config);
+
+        }).fail(function () {
+
+        });
+    }
+
     $(document).ready(function () {
         GraphAreaCashFlow();
+        GraphPizzaCashIn();
+        GraphPizzaCashOut();
     });
 
 

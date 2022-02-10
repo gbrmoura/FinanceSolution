@@ -45,7 +45,7 @@ namespace FinanceSolution.Inteface.Pages.AccountEntry
                     AccrualsType = x.AccountAccrual.Type,
                     PaymentMethod = x.PaymentMethod.Description,
                     PaymentType = x.PaymentMethod.Type
-                }).ToList();
+                }).OrderBy(x => x.Id).ToList();
 
                 var data = result
                     .Skip(model.start)

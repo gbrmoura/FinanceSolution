@@ -1,7 +1,0 @@
-cd FinanceSolution.Data
-
--Add migration
-dotnet ef --startup-project ..\FinanceSolution.Inteface  migrations add ****
-
--Update Database
-dotnet ef --startup-project ..\FinanceSolution.Inteface  database update7

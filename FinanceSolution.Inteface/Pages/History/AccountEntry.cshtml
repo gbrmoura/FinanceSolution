@@ -11,20 +11,35 @@
 <div class="row">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header bg-white mt-2">
-                <h3 class="card-title text-black">Filtros</h3>
-            </div>
             <div class="card-body">
-                
-                @* Data picker start *@
-                <input type="datetime-local">
+                <div class="row">
 
-                @* Data picker end *@
-                <input type="datetime-local">
+                    @* title *@
+                    <div class="col-md-7">
+                        <h3 class="card-title text-black">Filtros</h3>
+                    </div>
 
-                @* Search button *@
-                <button class="btn btn-primary"><i class="fa fa-search" style="font-size: 2em;"></i></button>
+                    @* Data picker start *@
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="begindate">Data de início</label>
+                            <input id="begindate" class="form-control" type="date" required>
+                        </div>
+                    </div>
 
+                    @* Data picker end *@
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="enddate">Data de Fim</label>
+                            <input id="enddate" class="form-control" type="date" required>
+                        </div>
+                    </div>
+
+                    @* Search button *@
+                    <div class="col-md-1" style="margin: auto;">
+                        <button id="search" class="btn btn-primary"><i class="fa fa-search" style="font-size: 3em;"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -39,7 +54,7 @@
             <div class="card-body">
                 <h3 class="card-title text-black">Saldo Total</h3>
                 <div class="d-inline-block">
-                    <h2 class="text-black">@Model.Amount</h2>
+                    <h2 id="cash-title" class="text-black"></h2>
                 </div>
                 <span class="float-right display-5 opacity-5"><i class="fa fa-balance-scale"></i></i></span>
             </div>
@@ -52,7 +67,7 @@
             <div class="card-body">
                 <h3 class="card-title text-black">Saldo Total</h3>
                 <div class="d-inline-block">
-                    <h2 class="text-black">@Model.CashIn</h2>
+                    <h2 id="cashin-title" class="text-black"></h2>
                 </div>
                 <span class="float-right display-5 opacity-5"><i class="fa fa-chevron-up"
                         style="color: green;"></i></span>
@@ -66,7 +81,7 @@
             <div class="card-body">
                 <h3 class="card-title text-black">Saida</h3>
                 <div class="d-inline-block">
-                    <h2 class="text-black">@Model.CashOut</h2>
+                    <h2 id="cashout-title" class="text-black"></h2>
                 </div>
                 <span class="float-right display-5 opacity-5">
                     <i class="fa fa-chevron-down" style="color: red;"></i>
@@ -77,9 +92,96 @@
 
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title text-black">Lançamentos</h3>
+                <div class="row">
+                    <div id="entry-card" class="col-md-12"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+
+    @* Total *@
+    <div class="col-md-12 col-sm-12">
+        <div class="card">
+            <div class="card-header bg-white mt-2">
+                <h4 class="card-title">Grafico de Entrada e Saida</h4>
+            </div>
+            <div style="padding: 0px 10px 10px 10px;">
+                <canvas id="chart-area-graph" height="90px" class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-white mt-2">
+                        <h4 class="card-title">Tipos Lançamentos de Entrada</h4>
+                    </div>
+                    <div style="padding: 0px 20px 20px 20px;">
+                        <canvas id="chart-pizza-in" height="150px" class="chartjs-render-monitor"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-white mt-2">
+                        <h4 class="card-title">Tipos de Lançamentos de Saida</h4>
+                    </div>
+                    <div style="padding: 0px 10px 10px 10px;">
+                        <canvas id="chart-pizza-out" height="150px" class="chartjs-render-monitor"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section scripts{
+<script src="~/js/pages/history/account-entry.js"></script>
 <script>
 
+    $(document).ready(function () {
+        
+        // Initialize
+        var begin = new Date();
+        var end = new Date();
+
+
+        GraphPizzaCashOut(begin, end);
+        GraphPizzaCashIn(begin, end);
+        setTitleData(begin, end);
+        
+        $('#search').on('click', function () {
+            var begin = $('#begindate').val();
+            var end = $('#enddate').val();
+
+            GraphPizzaCashOut(begin, end);
+            GraphPizzaCashIn(begin, end);
+            setTitleData(begin, end);
+        });
+
+    });
 
 </script>
 }

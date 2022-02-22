@@ -10,23 +10,29 @@ Tem como um de deus pontos positivos a facilidade de uso, pois possui uma interf
 
 É Necessario a aqueles que vão trabalhar no projeto, que sigam os passos abaixo para que o o ambiente de desenvolvimento esteja devidamente configurado para uso.
 
-E um dos principais passos para quem usa o prompt de comando, é necessario que o mesmo esteja no diretorio do projeto.
-```
-..\FinanceSolution\
-```
+E um dos principais passos para quem usa o prompt de comando, é necessario que o mesmo esteja no diretorio do projeto. `..\FinanceSolution\`.
 
 ## Banco de Dados
 
 Todos os comandos que vão ser executados para configurar o banco de dados, devem ser executados no diretorio do projeto Data.
-```
 `..\FinanceSolution\FinanceSolution.Data`,
-```
 
 ### Comandos para Migration
 
-Para gerar uma migração nova, é necessario o comando `dotnet ef --startup-project ..\FinanceSolution.Inteface migrations add ****`, lembrando que onde se encontra os asteriscos deve ser sempre mudado para o nome da migration. 
+Para gerar uma nova migration, basta executar o comando:
+```
+dotnet ef --startup-project ..\FinanceSolution.Inteface migrations add ****
+```
+Lembrando que é necessario alterar o nome da migration para que ela seja gerada corretamente.
 
-Para remover uma migração é necessario executar o comando `dotnet ef --startup-project ..\FinanceSolution.Inteface migrations remove`, para remover uma migration especificar é somente necessario colocar o nome da propria na frente do remove.
+Para remover uma migration, basta executar o comando:
+```
+dotnet ef --startup-project ..\FinanceSolution.Inteface migrations remove
+```
+E se for necessario excluir uma migration especifica, basta executar o comando abaixo, trocar os asteristicos por o nome da migration:
+```
+dotnet ef --startup-project ..\FinanceSolution.Inteface migrations remove ****
+```
 
 ### Comandos para Banco
 

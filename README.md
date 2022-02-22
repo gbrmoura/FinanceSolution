@@ -1,19 +1,26 @@
 # Fincance Solution
 
-## Oque é?
+O projeto Finance Solution de principio tem como principal intuito ajudar todos os seus usuarios a terem uma melhor visão financeira. Conseguindo de forma simples, gerenciar o seu dinheiro economizando em diversas pontas.
 
-Finance Solution é uma pagina web com o intuito de ajudar seus usuarios a terem o controle melhor de sua situação financeira.
+Tem como um de deus pontos positivos a facilidade de uso, pois possui uma interface simples e intuitiva, permitindo que todos os usuarios possam ter uma melhor visão financeira.
 
-Possuindo uma interface simples, e de facil utilização.
+<p align="center"> <img src="Docs/img/login-page.png" style="border-radius: 10px;"> </p>
 
-<p align="center">
-  <img src="Docs/img/login-page.png" style="border-radius: 5px;">
-</p>
+# Desenvolvedores
+
+É Necessario a aqueles que vão trabalhar no projeto, que sigam os passos abaixo para que o o ambiente de desenvolvimento esteja devidamente configurado para uso.
+
+E um dos principais passos para quem usa o prompt de comando, é necessario que o mesmo esteja no diretorio do projeto.
+```
+..\FinanceSolution\
+```
 
 ## Banco de Dados
 
-Todos os comando que vão ser executados aqui devem primeiro estar no diretorio `..\FinanceSolution\FinanceSolution.Data`, e para chergamos a este diretorio, tendo como base o diretorio pai do projeto, deve-se executar o comando `cd FinanceSoltuion.Data`.
-
+Todos os comandos que vão ser executados para configurar o banco de dados, devem ser executados no diretorio do projeto Data.
+```
+`..\FinanceSolution\FinanceSolution.Data`,
+```
 
 ### Comandos para Migration
 

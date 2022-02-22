@@ -4,7 +4,7 @@ O projeto Finance Solution de principio tem como principal intuito ajudar todos 
 
 Tem como um de deus pontos positivos a facilidade de uso, pois possui uma interface simples e intuitiva, permitindo que todos os usuarios possam ter uma melhor visão financeira.
 
-<p align="center"> <img src="Docs/img/login-page.png" style="border-radius: 10px;"> </p>
+<p align="center"> <img src="Docs/img/login-page.png" style="border-radius: 10px; width: 80%"> </p>
 
 # Desenvolvedores
 

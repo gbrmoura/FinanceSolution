@@ -36,10 +36,7 @@ dotnet ef --startup-project ..\FinanceSolution.Inteface migrations remove ****
 
 ### Comandos para Banco
 
-Para atualizar o banco de dados por meio de comandos, usando o entity framework, é necessario somente rodar `dotnet ef --startup-project ..\FinanceSolution.Inteface  database update`.
-
-E caso seja necesserario, é possivel dar drop do banco de dados por comando, `dotnet ef --startup-project ..\FinanceSolution.Inteface database drop`.
-
-## Publicação do Projeto
-
-...
+Para atualizar o banco de dados utilizando as migrations e tambem o framework `EntityFramework`, basta executar o comando:
+```
+dotnet ef --startup-project ..\FinanceSolution.Inteface  database update
+```
